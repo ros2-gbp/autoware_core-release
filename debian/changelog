@@ -1,0 +1,47 @@
+ros-humble-autoware-crop-box-filter (1.4.0-1jammy) jammy; urgency=high
+
+  * chore: bump version to 1.3.0 (#554 <https://github.com/autowarefoundation/autoware_core/issues/554>)
+  * Contributors: Ryohsuke Mitsudome
+
+ -- amc-nu <abrahammonrroy@yahoo.com>  Sun, 10 Aug 2025 15:00:00 -0000
+
+ros-humble-autoware-crop-box-filter (1.3.0-1jammy) jammy; urgency=high
+
+  * fix: to be consistent version in all package.xml(s)
+  * chore: bump up version to 1.1.0 (#462 <https://github.com/autowarefoundation/autoware_core/issues/462>) (#464 <https://github.com/autowarefoundation/autoware_core/issues/464>)
+  * fix(autoware_crop_box_filter): fix deprecated autoware_utils header (#418 <https://github.com/autowarefoundation/autoware_core/issues/418>)
+    * fix autoware_utils header
+    * style(pre-commit): autofix
+    ---------
+    Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+    Co-authored-by: Yutaka Kondo <mailto:yutaka.kondo@youtalk.jp>
+  * feat(autoware_utils): remove managed transform buffer (#360 <https://github.com/autowarefoundation/autoware_core/issues/360>)
+    * feat(autoware_utils): remove managed transform buffer
+    * fix(autoware_ground_filter): redundant inclusion
+    ---------
+    Co-authored-by: Yutaka Kondo <mailto:yutaka.kondo@youtalk.jp>
+  * Contributors: Amadeusz Szymko, Masaki Baba, Yutaka Kondo, github-actions
+
+ -- amc-nu <abrahammonrroy@yahoo.com>  Sun, 22 Jun 2025 15:00:00 -0000
+
+ros-humble-autoware-crop-box-filter (1.1.0-1jammy) jammy; urgency=high
+
+  * feat(autoware_utils): remove managed transform buffer (#360 <https://github.com/autowarefoundation/autoware_core/issues/360>)
+    * feat(autoware_utils): remove managed transform buffer
+    * fix(autoware_ground_filter): redundant inclusion
+    ---------
+    Co-authored-by: Yutaka Kondo <mailto:yutaka.kondo@youtalk.jp>
+  * Contributors: Amadeusz Szymko
+
+ -- amc-nu <abrahammonrroy@yahoo.com>  Wed, 30 Apr 2025 15:00:00 -0000
+
+ros-humble-autoware-crop-box-filter (1.0.0-1jammy) jammy; urgency=high
+
+  * chore: update version in package.xml
+  * feat(autoware_crop_box_filter): reimplementation in core repo (#279 <https://github.com/autowarefoundation/autoware_core/issues/279>)
+    Co-authored-by: Yutaka Kondo <mailto:yutaka.kondo@youtalk.jp>
+  * Contributors: Ryohsuke Mitsudome, 心刚
+
+ -- amc-nu <abrahammonrroy@yahoo.com>  Sun, 30 Mar 2025 15:00:00 -0000
+
+
