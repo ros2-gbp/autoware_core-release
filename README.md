@@ -1,8 +1,43 @@
-# autoware_core
+# autoware_pyplot
 
-- An [Autoware](https://github.com/autowarefoundation/autoware) repository that contains a basic set of high-quality, stable ROS packages for autonomous driving.
+This package provides C++ interface for the notable `matplotlib` using `pybind11` backend for
 
-- Although this repository is currently empty, porting of code from Universe to Core will begin once the interfaces for Autoware Core/Universe have been finalized, as per ongoing [Autoware Architecture WG](https://github.com/autowarefoundation/autoware/discussions?discussions_q=label%3Aarchitecture_wg) discussions.
-- A more detailed explanation about Autoware Core can be found on the [Autoware concepts documentation page](https://autowarefoundation.github.io/autoware-documentation/main/design/autoware-concepts/#the-core-module).
+- creating scientific plots and images illustrating the function inputs/outputs
+- debugging the output and internal data of a function before unit testing in a more lightweight manner than planning_simulator
 
-- For researchers and developers who want to extend the functionality of Autoware Core with experimental, cutting-edge ROS packages, see [Autoware Universe](https://github.com/autowarefoundation/autoware_universe).
+## usage
+
+In your main function, setup the python context and import `matplotlib`
+
+```cpp
+#include <autoware/pyplot/pyplot.hpp>
+#include <pybind11/embed.h>
+
+// in main...
+  py::scoped_interpreter guard{};
+  auto plt = autoware::pyplot::import();
+```
+
+Then you can use major functionalities of `matplotlib` almost in the same way as native python code.
+
+```cpp
+{
+    plt.plot(Args(std::vector<int>({1, 3, 2, 4})), Kwargs("color"_a = "blue", "linewidth"_a = 1.0));
+    plt.xlabel(Args("x-title"));
+    plt.ylabel(Args("y-title"));
+    plt.title(Args("title"));
+    plt.xlim(Args(0, 5));
+    plt.ylim(Args(0, 5));
+    plt.grid(Args(true));
+    plt.savefig(Args("test_single_plot.png"));
+}
+
+{
+    auto [fig, axes] = plt.subplots(1, 2);
+    auto & ax1 = axes[0];
+    auto & ax2 = axes[1];
+
+    ax1.set_aspect(Args("equal"));
+    ax2.set_aspect(Args("equal"));
+}
+```
