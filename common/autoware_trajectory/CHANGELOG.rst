@@ -50,6 +50,77 @@ Changelog for package autoware_trajectory
 * chore: include iostream and link yaml-cpp for Jazzy (`#351 <https://github.com/autowarefoundation/autoware_core/issues/351>`_)
 * Contributors: Mamoru Sobue, Tim Clephas, Yukinari Hisaki
 
+1.7.0 (2026-02-14)
+------------------
+* Merge remote-tracking branch 'origin/main' into humble
+* refactor(planning): deprecate lanelet_extension geometry conversion function (`#834 <https://github.com/autowarefoundation/autoware_core/issues/834>`_)
+  Co-authored-by: Junya Sasaki <j2sasaki1990@gmail.com>
+* chore(autoware_motion_utils, autoware_trajectory, autoware_interpolation): add maintainers for packages (`#821 <https://github.com/autowarefoundation/autoware_core/issues/821>`_)
+  * add maintainers for autoware_interpolation
+  * add maintainers for autoware_motion_utils
+  * add maintainers for autoware_trajectory
+  ---------
+  Co-authored-by: Satoshi OTA <44889564+satoshi-ota@users.noreply.github.com>
+* chore(autoware_trajectory): add a maintainer (`#819 <https://github.com/autowarefoundation/autoware_core/issues/819>`_)
+* docs(autoware_trajectory): fix anker link for pre-commit (`#816 <https://github.com/autowarefoundation/autoware_core/issues/816>`_)
+* fix(trajectory): fix potential undefined behavior in closest() (`#815 <https://github.com/autowarefoundation/autoware_core/issues/815>`_)
+  Remove premature dereference of std::optional before checking if it
+  has a value. The original code dereferenced the result of
+  closest_with_constraint() before assigning to s, which could cause
+  undefined behavior if the function returns std::nullopt.
+  Detected by Facebook Infer static analyzer (OPTIONAL_EMPTY_ACCESS).
+  Co-authored-by: Claude Opus 4.5 <noreply@anthropic.com>
+* fix(trajectory): add at least one prev/next lanelet for generating reference_path (`#810 <https://github.com/autowarefoundation/autoware_core/issues/810>`_)
+* feat(trajectory): add function to clamp `InterpolatedArray` to maximum value (`#791 <https://github.com/autowarefoundation/autoware_core/issues/791>`_)
+* Contributors: Junya Sasaki, Mamoru Sobue, Mitsuhiro Sakamoto, Ryohsuke Mitsudome, Ryuta Kambe, Takagi, Isamu, mkquda
+
+1.6.0 (2025-12-30)
+------------------
+* Merge remote-tracking branch 'origin/main' into tmp/bot/bump_version_base
+* feat(trajectory): added find zero velocity position for continuous trajectory (`#759 <https://github.com/autowarefoundation/autoware_core/issues/759>`_)
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+  Co-authored-by: Mamoru Sobue <hilo.soblin@gmail.com>
+* fix(autoware_trajectory): fix missing dependencies (`#734 <https://github.com/autowarefoundation/autoware_core/issues/734>`_)
+* fix(autoware_trajectory): make the get_index function safe (`#568 <https://github.com/autowarefoundation/autoware_core/issues/568>`_)
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+  Co-authored-by: Junya Sasaki <j2sasaki1990@gmail.com>
+  Co-authored-by: Mamoru Sobue <hilo.soblin@gmail.com>
+* feat(trajectory): align build_reference_path with vm-01-11 spec (`#702 <https://github.com/autowarefoundation/autoware_core/issues/702>`_)
+  Co-authored-by: mitukou1109 <mitukou1109@gmail.com>
+* chore: jazzy-porting, autoware_trajectory, add array size assignment to solve compile failure (`#644 <https://github.com/autowarefoundation/autoware_core/issues/644>`_)
+  * build::jazzy-porting::add array size assignment to sovle compile failures with array bounds checking warnings , v0.0
+  * build::jazzy-porting::use warning surpress macro for false positives of array bounds warnings, v0.1
+  ---------
+* fix(trajectory): copy lane id interpolator array in copy assignment (`#724 <https://github.com/autowarefoundation/autoware_core/issues/724>`_)
+* ci(pre-commit): autoupdate (`#723 <https://github.com/autowarefoundation/autoware_core/issues/723>`_)
+  * pre-commit formatting changes
+* docs(trajectory): reorganize autoware_trajectory documentation (`#715 <https://github.com/autowarefoundation/autoware_core/issues/715>`_)
+* Contributors: Giovanni Muhammad Raditya, Mamoru Sobue, Mete Fatih Cırıt, Mitsuhiro Sakamoto, Ryohsuke Mitsudome, Sarun MUKDAPITAK, Yukinari Hisaki, github-actions, 心刚
+
+1.5.0 (2025-11-16)
+------------------
+* Merge remote-tracking branch 'origin/main' into humble
+* feat(lanelet2_utils): organize maps by vm-map-spec id (`#716 <https://github.com/autowarefoundation/autoware_core/issues/716>`_)
+* docs(autoware_trajectory): add crossed documentation (`#705 <https://github.com/autowarefoundation/autoware_core/issues/705>`_)
+* feat: replace `ament_auto_package` to `autoware_ament_auto_package` (`#700 <https://github.com/autowarefoundation/autoware_core/issues/700>`_)
+  * replace ament_auto_package to autoware_ament_auto_package
+  * style(pre-commit): autofix
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* feat(trajectory): improve crossed() to handle range, add crossed_with_polygon (`#685 <https://github.com/autowarefoundation/autoware_core/issues/685>`_)
+* docs(autoware_trajectory): update API table of autoware_trajectory document (`#687 <https://github.com/autowarefoundation/autoware_core/issues/687>`_)
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* feat(autoware_trajectory): add footprint along the trajectory (`#678 <https://github.com/autowarefoundation/autoware_core/issues/678>`_)
+* feat(autoware_trajectory): add lateral_distance computation (`#655 <https://github.com/autowarefoundation/autoware_core/issues/655>`_)
+* docs(autoware_trajectory): fix drawio link of self-intersecting images (`#659 <https://github.com/autowarefoundation/autoware_core/issues/659>`_)
+  fix broken drawio link
+* chore: jazzy-porting:fix missing header file (`#630 <https://github.com/autowarefoundation/autoware_core/issues/630>`_)
+* feat(autoware_trajectory): add more test, verify implementation for find_nearest_index in autoware_trajectory packages (`#578 <https://github.com/autowarefoundation/autoware_core/issues/578>`_)
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+  Co-authored-by: Mamoru Sobue <hilo.soblin@gmail.com>
+* chore: bump version (1.4.0) and update changelog (`#608 <https://github.com/autowarefoundation/autoware_core/issues/608>`_)
+* Contributors: Mamoru Sobue, Mete Fatih Cırıt, Sarun MUKDAPITAK, Yutaka Kondo, mitsudome-r, 心刚
+
 1.4.0 (2025-08-11)
 ------------------
 * Merge remote-tracking branch 'origin/main' into humble
