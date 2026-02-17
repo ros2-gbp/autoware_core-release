@@ -18,6 +18,7 @@
 #include <autoware/ndt_scan_matcher/ndt_omp/estimate_covariance.hpp>
 #include <autoware/ndt_scan_matcher/ndt_scan_matcher_core.hpp>
 #include <autoware/ndt_scan_matcher/particle.hpp>
+#include <autoware/qos_utils/qos_compatibility.hpp>
 #include <autoware_utils_geometry/geometry.hpp>
 #include <autoware_utils_pcl/transforms.hpp>
 
@@ -114,7 +115,7 @@ NDTScanMatcher::NDTScanMatcher(const rclcpp::NodeOptions & options)
     this, this->get_clock(), period_ns, std::bind(&NDTScanMatcher::callback_timer, this),
     timer_callback_group_);
   initial_pose_sub_ = this->create_subscription<geometry_msgs::msg::PoseWithCovarianceStamped>(
-    "ekf_pose_with_covariance", 100,
+    "ekf_pose_with_covariance", 10,
     std::bind(&NDTScanMatcher::callback_initial_pose, this, std::placeholders::_1),
     initial_pose_sub_opt);
   sensor_points_sub_ = this->create_subscription<sensor_msgs::msg::PointCloud2>(
@@ -195,12 +196,12 @@ NDTScanMatcher::NDTScanMatcher(const rclcpp::NodeOptions & options)
       "ndt_align_srv",
       std::bind(
         &NDTScanMatcher::service_ndt_align, this, std::placeholders::_1, std::placeholders::_2),
-      rclcpp::ServicesQoS().get_rmw_qos_profile(), sensor_callback_group);
+      AUTOWARE_DEFAULT_SERVICES_QOS_PROFILE(), sensor_callback_group);
   service_trigger_node_ = this->create_service<std_srvs::srv::SetBool>(
     "trigger_node_srv",
     std::bind(
       &NDTScanMatcher::service_trigger_node, this, std::placeholders::_1, std::placeholders::_2),
-    rclcpp::ServicesQoS().get_rmw_qos_profile(), sensor_callback_group);
+    AUTOWARE_DEFAULT_SERVICES_QOS_PROFILE(), sensor_callback_group);
 
   ndt_ptr_->setParams(param_.ndt);
 
