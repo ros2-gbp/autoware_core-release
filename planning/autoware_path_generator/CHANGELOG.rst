@@ -63,6 +63,83 @@ Changelog for package autoware_path_generator
 * feat(autoware_path_generator): use autoware_trajectory for cropping bounds (`#349 <https://github.com/autowarefoundation/autoware_core/issues/349>`_)
 * Contributors: Kazunori-Nakajima, Mamoru Sobue, Mitsuhiro Sakamoto, Yukinari Hisaki
 
+1.7.0 (2026-02-14)
+------------------
+* Merge remote-tracking branch 'origin/main' into humble
+* refactor(planning): deprecate lanelet_extension geometry conversion function (`#834 <https://github.com/autowarefoundation/autoware_core/issues/834>`_)
+  Co-authored-by: Junya Sasaki <j2sasaki1990@gmail.com>
+* chore: reflect the move of the description packages (`#811 <https://github.com/autowarefoundation/autoware_core/issues/811>`_)
+* refactor(planning, common): replace lanelet2_extension function (`#796 <https://github.com/autowarefoundation/autoware_core/issues/796>`_)
+* revert: feat(path_generator): use `route_manager` to handle route data `#725 <https://github.com/autowarefoundation/autoware_core/issues/725>`_ (`#801 <https://github.com/autowarefoundation/autoware_core/issues/801>`_)
+  This reverts commit 2403cb5952d33db8e4a403d6cc7b368521d47f5e.
+* feat(path_generator): use `route_manager` to handle route data (`#725 <https://github.com/autowarefoundation/autoware_core/issues/725>`_)
+* Contributors: Mamoru Sobue, Mitsuhiro Sakamoto, Ryohsuke Mitsudome, Takagi, Isamu
+
+1.6.0 (2025-12-30)
+------------------
+* Merge remote-tracking branch 'origin/main' into tmp/bot/bump_version_base
+* chore(path_generator): add new maintainers to package.xml of path_generator (`#768 <https://github.com/autowarefoundation/autoware_core/issues/768>`_)
+  * chore: add new maintainers to package.xml of path_generator
+  * chore: remove maintainers
+  ---------
+* feat(autoware_lanelet2_utils): replace from/toBinMsg (`#737 <https://github.com/autowarefoundation/autoware_core/issues/737>`_)
+  Co-authored-by: Junya Sasaki <j2sasaki1990@gmail.com>
+  Co-authored-by: Mamoru Sobue <hilo.soblin@gmail.com>
+* fix(path_generator): cut path before loop prior to intersection check (`#758 <https://github.com/autowarefoundation/autoware_core/issues/758>`_)
+  * fix(path_generator): cut path before loop prior to intersection check
+  * fix(path_generator): prevent crash when trimming short bounds in intersection check
+  Add defensive check in trim_bound lambda to prevent calling crop() on trajectories that are too short. This fixes SIGSEGV crashes that occurred when lanelet_sequence was shortened by loop detection, resulting in bounds that were shorter than vehicle_length.
+  The fix ensures that:
+  - If bound.length() <= vehicle_length, the original bound is returned
+  - If bound.length() > vehicle_length, crop() is safely executed
+  - After crop(), if the result is empty, the original bound is returned
+  This resolves test failures in:
+  - test_test_static_centerline_generator_path_generator_case1_launch.test.py (Test 6)
+  - test_test_static_centerline_generator_path_generator_case4_launch.test.py (Test 9)
+  Both tests were timing out due to crashes in get_first_start_edge_bound_intersection_arc_length() when calling Trajectory<>::restore() on invalid cropped trajectories.
+  ---------
+* refactor(vehicle_info_utils): reduce autoware_utils deps (`#754 <https://github.com/autowarefoundation/autoware_core/issues/754>`_)
+* feat(QC, path_generator): use build_reference_path() for path generation (`#736 <https://github.com/autowarefoundation/autoware_core/issues/736>`_)
+* fix(autoware_path_generator): fix maybe-unitialized warning from test code (`#730 <https://github.com/autowarefoundation/autoware_core/issues/730>`_)
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+  Co-authored-by: Junya Sasaki <j2sasaki1990@gmail.com>
+* ci(pre-commit): autoupdate (`#723 <https://github.com/autowarefoundation/autoware_core/issues/723>`_)
+  * pre-commit formatting changes
+* Contributors: Mamoru Sobue, Masahiro Kubota, Mete Fatih Cırıt, Ryohsuke Mitsudome, Sarun MUKDAPITAK, github-actions, tera24
+
+1.5.0 (2025-11-16)
+------------------
+* Merge remote-tracking branch 'origin/main' into humble
+* feat(lanelet2_utils): organize maps by vm-map-spec id (`#716 <https://github.com/autowarefoundation/autoware_core/issues/716>`_)
+* feat(autoware_lanelet2_utils): replace ported functions from autoware_lanelet2_extension (`#695 <https://github.com/autowarefoundation/autoware_core/issues/695>`_)
+* feat: replace `ament_auto_package` to `autoware_ament_auto_package` (`#700 <https://github.com/autowarefoundation/autoware_core/issues/700>`_)
+  * replace ament_auto_package to autoware_ament_auto_package
+  * style(pre-commit): autofix
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* fix(path_generator): add border point to/before waypoint group (`#620 <https://github.com/autowarefoundation/autoware_core/issues/620>`_)
+  * add function to find border point
+  * add field to store next lane id
+  * add border point to waypoint group when merging
+  * interpolate point on centerline in 3d
+  * add validation
+  * add border point to path if necessary
+  * add loop detection
+  * add tests for get_border_point()
+  * style(pre-commit): autofix
+  * fix function description
+  * rename variable to avoid shadowing
+  * flatten nest
+  * add comments for clarity
+  * style(pre-commit): autofix
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* feat(path_generator): add validation to avoid segfault (`#604 <https://github.com/autowarefoundation/autoware_core/issues/604>`_)
+  add validation
+  Co-authored-by: Junya Sasaki <j2sasaki1990@gmail.com>
+* chore: bump version (1.4.0) and update changelog (`#608 <https://github.com/autowarefoundation/autoware_core/issues/608>`_)
+* Contributors: Mamoru Sobue, Mete Fatih Cırıt, Mitsuhiro Sakamoto, Sarun MUKDAPITAK, Yutaka Kondo, mitsudome-r
+
 1.4.0 (2025-08-11)
 ------------------
 * Merge remote-tracking branch 'origin/main' into humble
