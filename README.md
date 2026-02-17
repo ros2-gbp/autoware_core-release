@@ -1,13 +1,8 @@
-# Autoware Core AD API
+# autoware_core
 
-## Overview
+- An [Autoware](https://github.com/autowarefoundation/autoware) repository that contains a basic set of high-quality, stable ROS packages for autonomous driving.
 
-The `autoware_core_api` is a meta-package within the Autoware project that provides the core Autonomous Driving (AD) API functionality. This package serves as the central integration point for AD API components, including the default AD API implementation and various adaptors for visualization and external interfaces.
+- Although this repository is currently empty, porting of code from Universe to Core will begin once the interfaces for Autoware Core/Universe have been finalized, as per ongoing [Autoware Architecture WG](https://github.com/autowarefoundation/autoware/discussions?discussions_q=label%3Aarchitecture_wg) discussions.
+- A more detailed explanation about Autoware Core can be found on the [Autoware concepts documentation page](https://autowarefoundation.github.io/autoware-documentation/main/design/autoware-concepts/#the-core-module).
 
-## Usage
-
-The `autoware_core_api` package can be launched with the following command:
-
-```bash
-ros2 launch autoware_core_api autoware_core_api.launch.xml
-```
+- For researchers and developers who want to extend the functionality of Autoware Core with experimental, cutting-edge ROS packages, see [Autoware Universe](https://github.com/autowarefoundation/autoware_universe).
