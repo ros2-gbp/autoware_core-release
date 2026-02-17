@@ -17,7 +17,9 @@
 #include "autoware/behavior_velocity_planner_common/utilization/boost_geometry_helper.hpp"
 #include "autoware/motion_utils/trajectory/trajectory.hpp"
 
+#include <autoware/lanelet2_utils/nn_search.hpp>
 #include <autoware/lanelet2_utils/topology.hpp>
+#include <autoware/trajectory/utils/pretty_build.hpp>
 #include <autoware_lanelet2_extension/utility/query.hpp>
 #include <autoware_utils_geometry/geometry.hpp>
 #include <tf2/utils.hpp>
@@ -645,9 +647,10 @@ std::optional<int64_t> getNearestLaneId(
     lanes.push_back(lanelet_map->laneletLayer.get(lane_id));
   }
 
-  lanelet::Lanelet closest_lane;
-  if (lanelet::utils::query::getClosestLanelet(lanes, current_pose, &closest_lane)) {
-    return closest_lane.id();
+  if (
+    const auto closest_lanelet_opt =
+      experimental::lanelet2_utils::get_closest_lanelet(lanes, current_pose)) {
+    return closest_lanelet_opt.value().id();
   }
   return std::nullopt;
 }
@@ -849,6 +852,32 @@ lanelet::Ids collectConnectedLaneIds(
     }
   }
   return lane_ids;
+}
+
+PathWithLaneId fromTrajectory(
+  const experimental::trajectory::Trajectory<
+    autoware_internal_planning_msgs::msg::PathPointWithLaneId> & path,
+  const std::vector<geometry_msgs::msg::Point> & left_bound,
+  const std::vector<geometry_msgs::msg::Point> & right_bound)
+{
+  PathWithLaneId path_msg;
+  path_msg.points = path.restore();
+  path_msg.left_bound = left_bound;
+  path_msg.right_bound = right_bound;
+  return path_msg;
+}
+
+void toTrajectory(
+  const PathWithLaneId & path_msg,
+  experimental::trajectory::Trajectory<autoware_internal_planning_msgs::msg::PathPointWithLaneId> &
+    path)
+{
+  const auto path_opt = experimental::trajectory::pretty_build(path_msg.points);
+  if (!path_opt) {
+    std::cerr << "[behavior_velocity](toTrajectory) Failed to build trajectory" << std::endl;
+    return;
+  }
+  path = *path_opt;
 }
 
 }  // namespace autoware::behavior_velocity_planner::planning_utils
