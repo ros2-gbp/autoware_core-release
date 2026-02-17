@@ -14,6 +14,50 @@ Changelog for package autoware_interpolation
   Co-authored-by: Yutaka Kondo <yutaka.kondo@youtalk.jp>
 * Contributors: Arjun Jagdish Ram, Takagi, Isamu
 
+1.7.0 (2026-02-14)
+------------------
+* Merge remote-tracking branch 'origin/main' into humble
+* chore(autoware_motion_utils, autoware_trajectory, autoware_interpolation): add maintainers for packages (`#821 <https://github.com/autowarefoundation/autoware_core/issues/821>`_)
+  * add maintainers for autoware_interpolation
+  * add maintainers for autoware_motion_utils
+  * add maintainers for autoware_trajectory
+  ---------
+  Co-authored-by: Satoshi OTA <44889564+satoshi-ota@users.noreply.github.com>
+* chore(autoware_interpolation): add a maintainer (`#818 <https://github.com/autowarefoundation/autoware_core/issues/818>`_)
+* feat(autoware_interpolation): exposing access to coefficients (`#671 <https://github.com/autowarefoundation/autoware_core/issues/671>`_)
+  * Changes to spline_interpolation code to expose access to spline coefficients
+  * fixes
+  * style(pre-commit): autofix
+  * removed unnecessary comments
+  * Added includes
+  * add includes
+  * added comment
+  * style(pre-commit): autofix
+  * unit-testing for new public functions
+  * style(pre-commit): autofix
+  * extra unit tests
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+  Co-authored-by: Taiki Yamada <129915538+TaikiYamada4@users.noreply.github.com>
+* perf(interpolation): optimize calc_closest_segment_indices (`#797 <https://github.com/autowarefoundation/autoware_core/issues/797>`_)
+* Contributors: Arjun Jagdish Ram, Junya Sasaki, Maxime CLEMENT, Ryohsuke Mitsudome, mkquda
+
+1.6.0 (2025-12-30)
+------------------
+
+1.5.0 (2025-11-16)
+------------------
+* Merge remote-tracking branch 'origin/main' into humble
+* feat: replace `ament_auto_package` to `autoware_ament_auto_package` (`#700 <https://github.com/autowarefoundation/autoware_core/issues/700>`_)
+  * replace ament_auto_package to autoware_ament_auto_package
+  * style(pre-commit): autofix
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* fix(interpolation): ensure consistent output size in splineYawFromPoints (`#670 <https://github.com/autowarefoundation/autoware_core/issues/670>`_)
+  Co-authored-by: Junya Sasaki <j2sasaki1990@gmail.com>
+* chore: bump version (1.4.0) and update changelog (`#608 <https://github.com/autowarefoundation/autoware_core/issues/608>`_)
+* Contributors: Maxime CLEMENT, Mete Fatih Cırıt, Yutaka Kondo, mitsudome-r
+
 1.4.0 (2025-08-11)
 ------------------
 * Merge remote-tracking branch 'origin/main' into humble
