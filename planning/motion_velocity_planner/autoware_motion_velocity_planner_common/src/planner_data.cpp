@@ -109,12 +109,15 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr crop_by_monolithic_trajectory_polygon(
     lowest_traj_height = std::min(lowest_traj_height, trajectory_point.pose.position.z);
     highest_traj_height = std::max(highest_traj_height, trajectory_point.pose.position.z);
   }
-  crop_filter.setMin(Eigen::Vector4f(
-    x_min, y_min, lowest_traj_height - filter_by_trajectory_param.height_margin, 1.0f));
-  crop_filter.setMax(Eigen::Vector4f(
-    x_max, y_max,
-    highest_traj_height + vehicle_info.vehicle_height_m + filter_by_trajectory_param.height_margin,
-    1.0f));
+  crop_filter.setMin(
+    Eigen::Vector4f(
+      x_min, y_min, lowest_traj_height - filter_by_trajectory_param.height_margin, 1.0f));
+  crop_filter.setMax(
+    Eigen::Vector4f(
+      x_max, y_max,
+      highest_traj_height + vehicle_info.vehicle_height_m +
+        filter_by_trajectory_param.height_margin,
+      1.0f));
 
   auto ret_pointcloud_ptr = std::make_shared<pcl::PointCloud<pcl::PointXYZ>>();
   crop_filter.filter(*ret_pointcloud_ptr);
@@ -267,13 +270,7 @@ double PlannerData::Object::get_dist_to_traj_poly(
   const std::vector<autoware_utils_geometry::Polygon2d> & decimated_traj_polys) const
 {
   if (!dist_to_traj_poly) {
-    const auto & obj_pose = predicted_object.kinematics.initial_pose_with_covariance.pose;
-    const auto obj_poly = autoware_utils_geometry::to_polygon2d(obj_pose, predicted_object.shape);
-    dist_to_traj_poly = std::numeric_limits<double>::max();
-    for (const auto & traj_poly : decimated_traj_polys) {
-      const double current_dist_to_traj_poly = bg::distance(traj_poly, obj_poly);
-      dist_to_traj_poly = std::min(*dist_to_traj_poly, current_dist_to_traj_poly);
-    }
+    dist_to_traj_poly = utils::calc_dist_to_traj_poly(predicted_object, decimated_traj_polys);
   }
   return *dist_to_traj_poly;
 }
@@ -449,7 +446,7 @@ PlannerData::Pointcloud::filter_and_cluster_point_clouds(
       filter_by_trajectory_param.min_trajectory_length +
       min_deceleration_distance * filter_by_trajectory_param.braking_distance_scale_factor;
     const auto & trimmed_trajectory =
-      motion_utils::isDrivingForward(raw_trajectory)
+      motion_utils::isDrivingForward(raw_trajectory) == true
         ? motion_utils::cropForwardPoints(
             decimated_trajectory, decimated_trajectory.front().pose.position, 0,
             trajectory_trim_length)

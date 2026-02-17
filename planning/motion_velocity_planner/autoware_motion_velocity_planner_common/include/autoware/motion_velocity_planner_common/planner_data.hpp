@@ -23,6 +23,8 @@
 #include <autoware_utils_geometry/boost_polygon_utils.hpp>
 #include <autoware_utils_rclcpp/parameter.hpp>
 #include <autoware_vehicle_info_utils/vehicle_info_utils.hpp>
+#include <tf2_ros/buffer.hpp>
+#include <tf2_ros/transform_listener.hpp>
 
 #include <autoware_map_msgs/msg/lanelet_map_bin.hpp>
 #include <autoware_perception_msgs/msg/predicted_objects.hpp>
@@ -44,8 +46,6 @@
 #include <pcl/segmentation/euclidean_cluster_comparator.h>
 #include <pcl/segmentation/extract_clusters.h>
 #include <pcl_conversions/pcl_conversions.h>
-#include <tf2_ros/buffer.h>
-#include <tf2_ros/transform_listener.h>
 
 #include <map>
 #include <memory>
@@ -81,16 +81,6 @@ struct TrajectoryPolygonCollisionCheck
   double goal_extended_trajectory_length{};
   bool enable_to_consider_current_pose{};
   double time_to_convergence{};
-};
-
-struct PointcloudObstacleFilteringParam  // TODO(takagi): delete this obsolete parameter type
-{
-  double pointcloud_voxel_grid_x{};
-  double pointcloud_voxel_grid_y{};
-  double pointcloud_voxel_grid_z{};
-  double pointcloud_cluster_tolerance{};
-  size_t pointcloud_min_cluster_size{};
-  size_t pointcloud_max_cluster_size{};
 };
 
 struct PointcloudPreprocessParams
@@ -183,17 +173,36 @@ public:
     /**
      * @brief compute and the minimal distance to `decimated_traj_polys` by bg::distance and cache
      * the result
-     * @note is it really OK to cache the result if the object itself is also cached and used in
-     * next iteration ?
      */
     double get_dist_to_traj_poly(
       const std::vector<autoware_utils_geometry::Polygon2d> & decimated_traj_polys) const;
+
+    /**
+     * @brief compute the unsigned normal distance to `traj_points` from object's center
+     */
     double get_dist_to_traj_lateral(const std::vector<TrajectoryPoint> & traj_points) const;
+
+    /**
+     * @brief compute the longitudinal signed distance between ego-baselink and object-center along
+     * `traj_points`
+     */
     double get_dist_from_ego_longitudinal(
       const std::vector<TrajectoryPoint> & traj_points,
       const geometry_msgs::msg::Point & ego_pos) const;
+
+    /**
+     * @brief compute the tangent velocity of the object against `traj_points`
+     */
     double get_lon_vel_relative_to_traj(const std::vector<TrajectoryPoint> & traj_points) const;
+
+    /**
+     * @brief compute the "lateral approaching velocity" of the object. if the object velocity
+     * vector (in world frame) is directed to decrease lateral absolute distance to `traj_points`,
+     * it is positive. otherwise it is negative. more simply if the object is moving away from
+     * `traj_points` it is negative.
+     */
     double get_lat_vel_relative_to_traj(const std::vector<TrajectoryPoint> & traj_points) const;
+
     geometry_msgs::msg::Pose get_predicted_current_pose(
       const rclcpp::Time & current_stamp, const rclcpp::Time & predicted_objects_stamp) const;
     geometry_msgs::msg::Pose calc_predicted_pose(
@@ -250,20 +259,30 @@ public:
       }
       return cluster_indices.value();
     };
-    // TODO(takagi): Remove these function after universe modules eliminates these functions.
-    const pcl::PointCloud<pcl::PointXYZ>::Ptr get_filtered_pointcloud_ptr(
-      [[maybe_unused]] const autoware::motion_velocity_planner::TrajectoryPoints &
-        trajectory_points,
-      [[maybe_unused]] const autoware::vehicle_info_utils::VehicleInfo & vehicle_info) const
+    /*
+     * @brief extract points included in all clusters as a single pointcloud
+     */
+    pcl::PointCloud<pcl::PointXYZ> extract_clustered_points() const
     {
-      return get_filtered_pointcloud_ptr();
-    };
-    const std::vector<pcl::PointIndices> get_cluster_indices(
-      [[maybe_unused]] const autoware::motion_velocity_planner::TrajectoryPoints &
-        trajectory_points,
-      [[maybe_unused]] const autoware::vehicle_info_utils::VehicleInfo & vehicle_info) const
-    {
-      return get_cluster_indices();
+      const auto & clusters = get_cluster_indices();
+      const auto & source_cloud_ptr = get_filtered_pointcloud_ptr();
+
+      std::vector<int> combined_indices;
+      size_t total_points = 0;
+      for (const auto & cluster : clusters) {
+        total_points += cluster.indices.size();
+      }
+      combined_indices.reserve(total_points);
+
+      for (const auto & cluster : clusters) {
+        combined_indices.insert(
+          combined_indices.end(), cluster.indices.begin(), cluster.indices.end());
+      }
+
+      pcl::PointCloud<pcl::PointXYZ> extracted_cloud;
+      pcl::copyPointCloud(*source_cloud_ptr, combined_indices, extracted_cloud);
+
+      return extracted_cloud;
     }
 
     PointcloudPreprocessParams preprocess_params_;
@@ -302,7 +321,7 @@ public:
 
   // other internal data
   // traffic_light_id_map_raw is the raw observation, while traffic_light_id_map_keep_last keeps the
-  // last observed infomation for UNKNOWN
+  // last observed information for UNKNOWN
   std::map<lanelet::Id, TrafficSignalStamped> traffic_light_id_map_raw_;
   std::map<lanelet::Id, TrafficSignalStamped> traffic_light_id_map_last_observed_;
 
