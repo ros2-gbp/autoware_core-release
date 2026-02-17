@@ -16,14 +16,15 @@
 
 #include "service_utils.hpp"
 
-#include <autoware_lanelet2_extension/utility/message_conversion.hpp>
-#include <autoware_lanelet2_extension/utility/query.hpp>
+#include <autoware/lanelet2_utils/conversion.hpp>
+#include <autoware/lanelet2_utils/nn_search.hpp>
 #include <autoware_lanelet2_extension/utility/route_checker.hpp>
 #include <autoware_lanelet2_extension/utility/utilities.hpp>
 
 #include <autoware_map_msgs/msg/lanelet_map_bin.hpp>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 
+#include <lanelet2_core/geometry/Lanelet.h>
 #include <lanelet2_core/geometry/LineString.h>
 
 #include <algorithm>
@@ -159,8 +160,8 @@ void MissionPlanner::on_operation_mode_state(const OperationModeState::ConstShar
 void MissionPlanner::on_map(const LaneletMapBin::ConstSharedPtr msg)
 {
   map_ptr_ = msg;
-  lanelet_map_ptr_ = std::make_shared<lanelet::LaneletMap>();
-  lanelet::utils::conversion::fromBinMsg(*map_ptr_, lanelet_map_ptr_);
+  lanelet_map_ptr_ = autoware::experimental::lanelet2_utils::remove_const(
+    autoware::experimental::lanelet2_utils::from_autoware_map_msgs(*map_ptr_));
 }
 
 Pose MissionPlanner::transform_pose(const Pose & pose, const Header & header)
@@ -502,18 +503,20 @@ bool MissionPlanner::check_reroute_safety(
       start_lanelets.push_back(lanelet);
     }
     // closest lanelet in start lanelets
-    lanelet::ConstLanelet closest_lanelet;
-    if (!lanelet::utils::query::getClosestLanelet(start_lanelets, current_pose, &closest_lanelet)) {
+    const auto closest_lanelet_opt =
+      experimental::lanelet2_utils::get_closest_lanelet(start_lanelets, current_pose);
+    if (!closest_lanelet_opt) {
       RCLCPP_ERROR(get_logger(), "Check reroute safety failed. Cannot find the closest lanelet.");
       return false;
     }
+    const auto & closest_lanelet = closest_lanelet_opt.value();
 
     const auto & centerline_2d = lanelet::utils::to2D(closest_lanelet.centerline());
-    const auto lanelet_point = lanelet::utils::conversion::toLaneletPoint(current_pose.position);
+    const auto lanelet_point = experimental::lanelet2_utils::from_ros(current_pose.position);
     const auto arc_coordinates = lanelet::geometry::toArcCoordinates(
       centerline_2d, lanelet::utils::to2D(lanelet_point).basicPoint());
     const double dist_to_current_pose = arc_coordinates.length;
-    const double lanelet_length = lanelet::utils::getLaneletLength2d(closest_lanelet);
+    const double lanelet_length = lanelet::geometry::length2d(closest_lanelet);
     accumulated_length = lanelet_length - dist_to_current_pose;
   } else {
     // compute distance from the current pose to the end of the current lanelet
@@ -525,18 +528,20 @@ bool MissionPlanner::check_reroute_safety(
       start_lanelets.push_back(lanelet);
     }
     // closest lanelet in start lanelets
-    lanelet::ConstLanelet closest_lanelet;
-    if (!lanelet::utils::query::getClosestLanelet(start_lanelets, current_pose, &closest_lanelet)) {
+    const auto closest_lanelet_opt =
+      experimental::lanelet2_utils::get_closest_lanelet(start_lanelets, current_pose);
+    if (!closest_lanelet_opt) {
       RCLCPP_ERROR(get_logger(), "Check reroute safety failed. Cannot find the closest lanelet.");
       return false;
     }
+    const auto & closest_lanelet = closest_lanelet_opt.value();
 
     const auto & centerline_2d = lanelet::utils::to2D(closest_lanelet.centerline());
-    const auto lanelet_point = lanelet::utils::conversion::toLaneletPoint(current_pose.position);
+    const auto lanelet_point = experimental::lanelet2_utils::from_ros(current_pose.position);
     const auto arc_coordinates = lanelet::geometry::toArcCoordinates(
       centerline_2d, lanelet::utils::to2D(lanelet_point).basicPoint());
     const double dist_to_current_pose = arc_coordinates.length;
-    const double lanelet_length = lanelet::utils::getLaneletLength2d(closest_lanelet);
+    const double lanelet_length = lanelet::geometry::length2d(closest_lanelet);
     accumulated_length = lanelet_length - dist_to_current_pose;
   }
 
@@ -551,7 +556,7 @@ bool MissionPlanner::check_reroute_safety(
     for (size_t primitive_idx = 0; primitive_idx < primitives.size(); ++primitive_idx) {
       const auto & primitive = primitives.at(primitive_idx);
       const auto & lanelet = lanelet_map_ptr_->laneletLayer.get(primitive.id);
-      lanelets_length.at(primitive_idx) = (lanelet::utils::getLaneletLength2d(lanelet));
+      lanelets_length.at(primitive_idx) = (lanelet::geometry::length2d(lanelet));
     }
     accumulated_length += *std::min_element(lanelets_length.begin(), lanelets_length.end());
   }
@@ -563,12 +568,12 @@ bool MissionPlanner::check_reroute_safety(
     const auto lanelet = lanelet_map_ptr_->laneletLayer.get(target_end_primitive.id);
     if (lanelet::utils::isInLanelet(target_goal, lanelet)) {
       const auto target_goal_position =
-        lanelet::utils::conversion::toLaneletPoint(target_goal.position);
+        experimental::lanelet2_utils::from_ros(target_goal.position);
       const double dist_to_goal = lanelet::geometry::toArcCoordinates(
                                     lanelet::utils::to2D(lanelet.centerline()),
                                     lanelet::utils::to2D(target_goal_position).basicPoint())
                                     .length;
-      const double target_lanelet_length = lanelet::utils::getLaneletLength2d(lanelet);
+      const double target_lanelet_length = lanelet::geometry::length2d(lanelet);
       // NOTE: `accumulated_length` here contains the length of the entire target_end_primitive, so
       // the remaining distance from the goal to the end of the target_end_primitive needs to be
       // subtracted.
