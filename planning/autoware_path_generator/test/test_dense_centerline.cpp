@@ -14,7 +14,6 @@
 
 #include "autoware/path_generator/node.hpp"
 
-#include <autoware_lanelet2_extension/utility/message_conversion.hpp>
 #include <autoware_lanelet2_extension/utility/query.hpp>
 #include <autoware_test_utils/autoware_test_utils.hpp>
 #include <autoware_test_utils/mock_data_parser.hpp>
@@ -35,7 +34,7 @@ PathGenerator::InputData create_input_data()
 
   const auto lanelet_map_path =
     ament_index_cpp::get_package_share_directory("autoware_lanelet2_utils") +
-    "/sample_map/dense_centerline/lanelet2_map.osm";
+    "/sample_map/vm_01_10-12/dense_centerline/lanelet2_map.osm";
   const auto lanelet_map_bin = autoware::test_utils::make_map_bin_msg(lanelet_map_path);
   if (lanelet_map_bin.header.frame_id == "") {
     throw std::runtime_error(
