@@ -14,6 +14,8 @@
 
 #include "node.hpp"
 
+#include "autoware/motion_velocity_planner_common/utils.hpp"
+
 #include <autoware/motion_utils/resample/resample.hpp>
 #include <autoware/motion_utils/trajectory/trajectory.hpp>
 #include <autoware/velocity_smoother/smoother/analytical_jerk_constrained_smoother/analytical_jerk_constrained_smoother.hpp>
@@ -25,6 +27,7 @@
 #include <tf2/time.hpp>
 #include <tf2_eigen/tf2_eigen.hpp>
 
+#include <autoware_internal_debug_msgs/msg/float64_stamped.hpp>
 #include <autoware_planning_msgs/msg/trajectory_point.hpp>
 #include <visualization_msgs/msg/marker_array.hpp>
 
@@ -36,7 +39,6 @@
 #include <map>
 #include <memory>
 #include <string>
-#include <unordered_set>
 #include <utility>
 #include <vector>
 
@@ -88,10 +90,11 @@ MotionVelocityPlannerNode::MotionVelocityPlannerNode(const rclcpp::NodeOptions &
   clear_velocity_limit_pub_ = this->create_publisher<VelocityLimitClearCommand>(
     "~/output/clear_velocity_limit", rclcpp::QoS{1}.transient_local());
   processing_time_publisher_ =
-    this->create_publisher<autoware_internal_debug_msgs::msg::Float64Stamped>(
-      "~/debug/processing_time_ms", 1);
+    std::make_shared<autoware_utils_debug::DebugPublisher>(this, "~/debug");
   debug_viz_pub_ =
     this->create_publisher<visualization_msgs::msg::MarkerArray>("~/debug/markers", 1);
+  debug_processed_pointcloud_pub_ =
+    this->create_publisher<sensor_msgs::msg::PointCloud2>("~/debug/processed_pointcloud", 1);
 
   // Parameters
   smooth_velocity_before_planning_ = declare_parameter<bool>("smooth_velocity_before_planning");
@@ -175,8 +178,11 @@ bool MotionVelocityPlannerNode::update_planner_data(
   if (check_with_log(
         no_ground_pointcloud_ptr, "Waiting for pointcloud",
         required_subscriptions.no_ground_pointcloud)) {
+    sw.tic("process_no_ground_pointcloud");
     auto no_ground_pointcloud = process_no_ground_pointcloud(no_ground_pointcloud_ptr);
-    processing_times["update_planner_data.pcl.process_no_ground_pointcloud"] = sw.toc(true);
+    processing_times["update_planner_data.pointcloud.affine_transform"] =
+      sw.toc("process_no_ground_pointcloud");
+    sw.tic("preprocess_pointcloud");
     if (no_ground_pointcloud) {
       planner_data_->no_ground_pointcloud.preprocess_pointcloud(
         std::move(*no_ground_pointcloud), input_traj_points, planner_data_->current_odometry,
@@ -184,7 +190,10 @@ bool MotionVelocityPlannerNode::update_planner_data(
         planner_data_->vehicle_info_, planner_data_->trajectory_polygon_collision_check,
         planner_data_->ego_nearest_dist_threshold, planner_data_->ego_nearest_yaw_threshold);
     }
+    processing_times["update_planner_data.pointcloud.preprocess_for_obstacle_*_modules"] =
+      sw.toc("preprocess_pointcloud");
   }
+  processing_times["update_planner_data.pointcloud"] = sw.toc(true);
 
   const auto occupancy_grid_ptr = sub_occupancy_grid_.take_data();
   if (check_with_log(
@@ -237,13 +246,17 @@ MotionVelocityPlannerNode::process_no_ground_pointcloud(
     return std::nullopt;
   }
 
-  pcl::PointCloud<pcl::PointXYZ> pc;
-  pcl::fromROSMsg(*msg, pc);
+  pcl::PointCloud<pcl::PointXYZ> pc_input;
+  pcl::fromROSMsg(*msg, pc_input);
 
-  Eigen::Affine3f affine = tf2::transformToEigen(transform.transform).cast<float>();
-  pcl::PointCloud<pcl::PointXYZ>::Ptr pc_transformed(new pcl::PointCloud<pcl::PointXYZ>);
-  if (!pc.empty()) autoware_utils_pcl::transform_pointcloud(pc, *pc_transformed, affine);
-  return *pc_transformed;
+  const Eigen::Affine3f affine = tf2::transformToEigen(transform.transform).cast<float>();
+  pcl::PointCloud<pcl::PointXYZ> pc_transformed;
+  if (!pc_input.empty()) autoware_utils_pcl::transform_pointcloud(pc_input, pc_transformed, affine);
+
+  pc_transformed.header = pc_input.header;
+  pc_transformed.header.frame_id = "map";
+
+  return pc_transformed;
 }
 
 void MotionVelocityPlannerNode::set_velocity_smoother_params()
@@ -330,54 +343,28 @@ void MotionVelocityPlannerNode::on_trajectory(
   lk.unlock();
 
   trajectory_pub_->publish(output_trajectory_msg);
+
+  if (
+    debug_processed_pointcloud_pub_->get_subscription_count() > 0 &&
+    planner_data_->no_ground_pointcloud.preprocess_params_.downsample_by_voxel_grid
+      .enable_downsample) {
+    sensor_msgs::msg::PointCloud2 output_pointcloud_msg;
+    pcl::toROSMsg(
+      planner_data_->no_ground_pointcloud.extract_clustered_points(), output_pointcloud_msg);
+    debug_processed_pointcloud_pub_->publish(output_pointcloud_msg);
+    processing_times["publish_down_sampled_pointcloud"] = stop_watch.toc(true);
+  }
+
   published_time_publisher_.publish_if_subscribed(
     trajectory_pub_, output_trajectory_msg.header.stamp);
   processing_times["Total"] = stop_watch.toc("Total");
   processing_diag_publisher_.publish(processing_times);
-  autoware_internal_debug_msgs::msg::Float64Stamped processing_time_msg;
-  processing_time_msg.stamp = get_clock()->now();
-  processing_time_msg.data = processing_times["Total"];
-  processing_time_publisher_->publish(processing_time_msg);
-}
 
-void MotionVelocityPlannerNode::insert_stop(
-  autoware_planning_msgs::msg::Trajectory & trajectory,
-  const geometry_msgs::msg::Point & stop_point) const
-{
-  const auto seg_idx =
-    autoware::motion_utils::findNearestSegmentIndex(trajectory.points, stop_point);
-  const auto insert_idx =
-    autoware::motion_utils::insertTargetPoint(seg_idx, stop_point, trajectory.points);
-  if (insert_idx) {
-    for (auto idx = *insert_idx; idx < trajectory.points.size(); ++idx)
-      trajectory.points[idx].longitudinal_velocity_mps = 0.0;
-  } else {
-    RCLCPP_WARN(get_logger(), "Failed to insert stop point");
-  }
-}
-
-void MotionVelocityPlannerNode::insert_slowdown(
-  autoware_planning_msgs::msg::Trajectory & trajectory,
-  const autoware::motion_velocity_planner::SlowdownInterval & slowdown_interval) const
-{
-  const auto from_seg_idx =
-    autoware::motion_utils::findNearestSegmentIndex(trajectory.points, slowdown_interval.from);
-  const auto from_insert_idx = autoware::motion_utils::insertTargetPoint(
-    from_seg_idx, slowdown_interval.from, trajectory.points);
-  const auto to_seg_idx =
-    autoware::motion_utils::findNearestSegmentIndex(trajectory.points, slowdown_interval.to);
-  const auto to_insert_idx =
-    autoware::motion_utils::insertTargetPoint(to_seg_idx, slowdown_interval.to, trajectory.points);
-  if (from_insert_idx && to_insert_idx) {
-    for (auto idx = *from_insert_idx; idx <= *to_insert_idx; ++idx) {
-      trajectory.points[idx].longitudinal_velocity_mps =
-        std::min(  // prevent the node from increasing the velocity
-          trajectory.points[idx].longitudinal_velocity_mps,
-          static_cast<float>(slowdown_interval.velocity));
-    }
-  } else {
-    RCLCPP_WARN(get_logger(), "Failed to insert slowdown point");
-  }
+  processing_time_publisher_->publish<autoware_internal_debug_msgs::msg::Float64Stamped>(
+    "processing_time_ms", processing_times["Total"]);
+  processing_time_publisher_->publish<autoware_internal_debug_msgs::msg::Float64Stamped>(
+    "mvp_common/processing_time_ms",
+    processing_times["Total"] - processing_times["plan_velocities"]);
 }
 
 autoware::motion_velocity_planner::TrajectoryPoints MotionVelocityPlannerNode::smooth_trajectory(
@@ -453,14 +440,12 @@ autoware_planning_msgs::msg::Trajectory MotionVelocityPlannerNode::generate_traj
   processing_times["calculate_time_from_start"] = stop_watch.toc("calculate_time_from_start");
   stop_watch.tic("plan_velocities");
   const auto planning_results = planner_manager_.plan_velocities(
-    input_trajectory_points, resampled_smoothed_trajectory_points, planner_data_);
+    input_trajectory_points, resampled_smoothed_trajectory_points, planner_data_,
+    processing_time_publisher_);
   processing_times["plan_velocities"] = stop_watch.toc("plan_velocities");
 
   for (const auto & planning_result : planning_results) {
-    for (const auto & stop_point : planning_result.stop_points)
-      insert_stop(output_trajectory_msg, stop_point);
-    for (const auto & slowdown_interval : planning_result.slowdown_intervals)
-      insert_slowdown(output_trajectory_msg, slowdown_interval);
+    utils::apply_planning_result(output_trajectory_msg.points, planning_result, get_logger());
     if (planning_result.velocity_limit) {
       velocity_limit_pub_->publish(*planning_result.velocity_limit);
     }
