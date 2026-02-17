@@ -16,6 +16,8 @@
 
 #include "utils/route_conversion.hpp"
 
+#include <autoware/qos_utils/qos_compatibility.hpp>
+
 #include <memory>
 
 namespace
@@ -100,15 +102,15 @@ RoutingNode::RoutingNode(const rclcpp::NodeOptions & options)
   cli_clear_route_ =
     create_client<autoware::component_interface_specs::planning::ClearRoute::Service>(
       autoware::component_interface_specs::planning::ClearRoute::name,
-      rmw_qos_profile_services_default, group_cli_);
+      AUTOWARE_DEFAULT_SERVICES_QOS_PROFILE(), group_cli_);
   cli_set_waypoint_route_ =
     create_client<autoware::component_interface_specs::planning::SetWaypointRoute::Service>(
       autoware::component_interface_specs::planning::SetWaypointRoute::name,
-      rmw_qos_profile_services_default, group_cli_);
+      AUTOWARE_DEFAULT_SERVICES_QOS_PROFILE(), group_cli_);
   cli_set_lanelet_route_ =
     create_client<autoware::component_interface_specs::planning::SetLaneletRoute::Service>(
       autoware::component_interface_specs::planning::SetLaneletRoute::name,
-      rmw_qos_profile_services_default, group_cli_);
+      AUTOWARE_DEFAULT_SERVICES_QOS_PROFILE(), group_cli_);
   sub_operation_mode_ =
     create_subscription<autoware::component_interface_specs::system::OperationModeState::Message>(
       autoware::component_interface_specs::system::OperationModeState::name,
@@ -119,7 +121,7 @@ RoutingNode::RoutingNode(const rclcpp::NodeOptions & options)
   cli_operation_mode_ =
     create_client<autoware::component_interface_specs::system::ChangeOperationMode::Service>(
       autoware::component_interface_specs::system::ChangeOperationMode::name,
-      rmw_qos_profile_services_default, group_cli_);
+      AUTOWARE_DEFAULT_SERVICES_QOS_PROFILE(), group_cli_);
 
   is_autoware_control_ = false;
   is_auto_mode_ = false;
@@ -203,7 +205,7 @@ void RoutingNode::on_clear_route(
   const autoware::adapi_specs::routing::ClearRoute::Service::Response::SharedPtr res)
 {
   // For safety, do not clear the route while it is in use.
-  // https://autowarefoundation.github.io/autoware-documentation/main/design/autoware-interfaces/ad-api/list/api/routing/clear_route/
+  // https://autowarefoundation.github.io/autoware-documentation/main/design/autoware-architecture-v1/interfaces/ad-api/list/api/routing/clear_route/
   if (is_auto_mode_ && is_autoware_control_) {
     if (!vehicle_stop_checker_.isVehicleStopped(stop_check_duration_)) {
       res->status.success = false;
