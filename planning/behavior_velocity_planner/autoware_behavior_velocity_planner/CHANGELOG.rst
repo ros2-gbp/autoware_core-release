@@ -5,6 +5,39 @@ Changelog for package autoware_behavior_velocity_planner
 1.1.0 (2025-05-01)
 ------------------
 
+1.7.0 (2026-02-14)
+------------------
+
+1.6.0 (2025-12-30)
+------------------
+* Merge remote-tracking branch 'origin/main' into tmp/bot/bump_version_base
+* chore: tf2_ros to hpp headers (`#616 <https://github.com/autowarefoundation/autoware_core/issues/616>`_)
+* Contributors: Tim Clephas, github-actions
+
+1.5.0 (2025-11-16)
+------------------
+* Merge remote-tracking branch 'origin/main' into humble
+* feat: replace `ament_auto_package` to `autoware_ament_auto_package` (`#700 <https://github.com/autowarefoundation/autoware_core/issues/700>`_)
+  * replace ament_auto_package to autoware_ament_auto_package
+  * style(pre-commit): autofix
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* feat(behavior_velocity_planner and behavior_velocity_planner_common)!: replace PathWithLaneId with Trajectory<> class (`#681 <https://github.com/autowarefoundation/autoware_core/issues/681>`_)
+  Co-authored-by: mitukou1109 <mitukou1109@gmail.com>
+* feat(behavior_velocity_planner): support processing_time for behavior_velocity_planner (`#677 <https://github.com/autowarefoundation/autoware_core/issues/677>`_)
+  support processing time for bvp
+* feat(autoware_behavior_velocity_planner): add roundabout module param path (`#603 <https://github.com/autowarefoundation/autoware_core/issues/603>`_)
+  feat(behavior_velocity_planner): add roundabout module parameter path
+* chore(behavior_velocity_planner): remove bvp run_out (`#629 <https://github.com/autowarefoundation/autoware_core/issues/629>`_)
+* fix(autoware_behavior_velocity_planner): enable empty no_ground_pointcloud (`#614 <https://github.com/autowarefoundation/autoware_core/issues/614>`_)
+  fix psim bug
+* fix(autoware_behavior_velocity_planner): let is_ready be false if  no ground pointcloud is null (`#610 <https://github.com/autowarefoundation/autoware_core/issues/610>`_)
+  * fix no_ground_pointcloud bug
+  * refactor code
+  ---------
+* chore: bump version (1.4.0) and update changelog (`#608 <https://github.com/autowarefoundation/autoware_core/issues/608>`_)
+* Contributors: Kem (TiankuiXian), Mamoru Sobue, Mete Fatih Cırıt, Sho Iwasawa, Yuki TAKAGI, Yutaka Kondo, mitsudome-r
+
 1.4.0 (2025-08-11)
 ------------------
 * Merge remote-tracking branch 'origin/main' into humble
