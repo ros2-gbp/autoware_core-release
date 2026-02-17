@@ -5,6 +5,52 @@ Changelog for package autoware_ekf_localizer
 1.1.0 (2025-05-01)
 ------------------
 
+1.7.0 (2026-02-14)
+------------------
+* Merge remote-tracking branch 'origin/main' into humble
+* fix(ekf_localizer): queue pop on ekf localizer (`#679 <https://github.com/autowarefoundation/autoware_core/issues/679>`_)
+  * feat: separate max_age and max_queue_size in AgedObjectQueue
+  When multiple pose sources (e.g., GNSS + NDT) are active, the queue
+  can legitimately grow beyond max_age. Separating these concerns allows:
+  1. max_age controls how many times each element is reused
+  2. max_queue_size monitors overall queue health without enforcing hard limits
+  * fix: warn and pop if queue is exceeded
+  * refactor: make less if statement
+  * chore: fix unclear comments
+  * doc: update schema.json
+  * doc: modify comments
+  ---------
+* Contributors: Motz, Ryohsuke Mitsudome
+
+1.6.0 (2025-12-30)
+------------------
+* Merge remote-tracking branch 'origin/main' into tmp/bot/bump_version_base
+* chore: jazzy-porting: fix test depend launch-test missing (`#738 <https://github.com/autowarefoundation/autoware_core/issues/738>`_)
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* chore: tf2_ros to hpp headers (`#616 <https://github.com/autowarefoundation/autoware_core/issues/616>`_)
+* Contributors: Tim Clephas, github-actions, 心刚
+
+1.5.0 (2025-11-16)
+------------------
+* Merge remote-tracking branch 'origin/main' into humble
+* feat: replace `ament_auto_package` to `autoware_ament_auto_package` (`#700 <https://github.com/autowarefoundation/autoware_core/issues/700>`_)
+  * replace ament_auto_package to autoware_ament_auto_package
+  * style(pre-commit): autofix
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* chore: update maintainer (`#637 <https://github.com/autowarefoundation/autoware_core/issues/637>`_)
+  * chore: update maintainer
+  remove Takeshi Ishita
+  * chore: update maintainer
+  remove Kento Yabuuchi
+  * chore: update maintainer
+  remove Shintaro Sakoda
+  * chore: update maintainer
+  remove Ryu Yamamoto
+  ---------
+* chore: bump version (1.4.0) and update changelog (`#608 <https://github.com/autowarefoundation/autoware_core/issues/608>`_)
+* Contributors: Mete Fatih Cırıt, Motz, Yutaka Kondo, mitsudome-r
+
 1.4.0 (2025-08-11)
 ------------------
 * chore: bump version to 1.3.0 (`#554 <https://github.com/autowarefoundation/autoware_core/issues/554>`_)
