@@ -1,0 +1,12 @@
+Source: ros-humble-autoware-sample-vehicle-description
+Section: misc
+Priority: optional
+Maintainer: Ryohsuke Mitsudome <ryohsuke.mitsudome@tier4.jp>
+Build-Depends: debhelper (>= 9.0.0), ros-humble-ament-cmake-auto, ros-humble-ros-workspace
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-humble-autoware-sample-vehicle-description
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-humble-xacro, ros-humble-ros-workspace
+Description: The autoware_sample_vehicle_description package
