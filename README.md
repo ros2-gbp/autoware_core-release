@@ -1,34 +1,8 @@
-# Planning Topic Converter
+# autoware_core
 
-## Purpose
+- An [Autoware](https://github.com/autowarefoundation/autoware) repository that contains a basic set of high-quality, stable ROS packages for autonomous driving.
 
-This package provides tools that convert topic type among types are defined in <https://github.com/autowarefoundation/autoware_msgs>.
+- Although this repository is currently empty, porting of code from Universe to Core will begin once the interfaces for Autoware Core/Universe have been finalized, as per ongoing [Autoware Architecture WG](https://github.com/autowarefoundation/autoware/discussions?discussions_q=label%3Aarchitecture_wg) discussions.
+- A more detailed explanation about Autoware Core can be found on the [Autoware concepts documentation page](https://autowarefoundation.github.io/autoware-documentation/main/design/autoware-concepts/#the-core-module).
 
-## Inner-workings / Algorithms
-
-### Usage example
-
-The tools in this package are provided as composable ROS 2 component nodes, so that they can be spawned into an existing process, launched from launch files, or invoked from the command line.
-
-```xml
-<load_composable_node target="container_name">
-  <composable_node pkg="planning_topic_converter" plugin="autoware::planning_topic_converter::PathToTrajectory" name="path_to_trajectory_converter" namespace="">
-  <!-- params -->
-  <param name="input_topic" value="foo"/>
-  <param name="output_topic" value="bar"/>
-  <!-- composable node config -->
-  <extra_arg name="use_intra_process_comms" value="false"/>
-  </composable_node>
-</load_composable_node>
-```
-
-## Parameters
-
-| Name           | Type   | Description        |
-| :------------- | :----- | :----------------- |
-| `input_topic`  | string | input topic name.  |
-| `output_topic` | string | output topic name. |
-
-## Assumptions / Known limits
-
-## Future extensions / Unimplemented parts
+- For researchers and developers who want to extend the functionality of Autoware Core with experimental, cutting-edge ROS packages, see [Autoware Universe](https://github.com/autowarefoundation/autoware_universe).
