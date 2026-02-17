@@ -18,6 +18,118 @@ Changelog for package autoware_lanelet2_utils
   ---------
 * Contributors: Mamoru Sobue, Yutaka Kondo
 
+1.7.0 (2026-02-14)
+------------------
+* Merge remote-tracking branch 'origin/main' into humble
+* feat(lanelet2_utils): add empty input handler for get_arc_coordinates (`#831 <https://github.com/autowarefoundation/autoware_core/issues/831>`_)
+  * add empty input lanelets handler for get_arc_coordinates
+  * add test ensure default ArcCoordinates
+  ---------
+  Co-authored-by: Junya Sasaki <j2sasaki1990@gmail.com>
+* docs(lanelet2_utils): add succeeding/preceding lanelet sequence illustration (`#830 <https://github.com/autowarefoundation/autoware_core/issues/830>`_)
+  added succeeding/preceding lanelet sequences illustration
+* feat(lanelet2_extension): port some lanelet2_extension query functions (2) (`#809 <https://github.com/autowarefoundation/autoware_core/issues/809>`_)
+* feat(lanelet2_extension): port remaining lanelet2_extension utilities functions (`#760 <https://github.com/autowarefoundation/autoware_core/issues/760>`_)
+  Co-authored-by: Junya Sasaki <j2sasaki1990@gmail.com>
+* feat(lanelet2_extension): port some lanelet2_extension query functions  (`#790 <https://github.com/autowarefoundation/autoware_core/issues/790>`_)
+  * port left/right/all_neighbor_lanelets and their tests
+  * replace getAllNeighbors* with ported functions
+  * add neighbors order description and verify in test
+  * add ported functions to API table
+  * add example code snippet
+  * Remove optional from return value
+  Assume one lanelet is always in return value (itself)
+  * change usage of left/right_lanelets (always check access)
+  * fix README for example code snippet
+  * fix cppcheck-differential
+  * fix README description
+  ---------
+  Co-authored-by: Junya Sasaki <j2sasaki1990@gmail.com>
+  Co-authored-by: Mamoru Sobue <hilo.soblin@gmail.com>
+* revert: feat(path_generator): use `route_manager` to handle route data `#725 <https://github.com/autowarefoundation/autoware_core/issues/725>`_ (`#801 <https://github.com/autowarefoundation/autoware_core/issues/801>`_)
+  This reverts commit 2403cb5952d33db8e4a403d6cc7b368521d47f5e.
+* feat(path_generator): use `route_manager` to handle route data (`#725 <https://github.com/autowarefoundation/autoware_core/issues/725>`_)
+* Contributors: Mitsuhiro Sakamoto, Ryohsuke Mitsudome, Sarun MUKDAPITAK
+
+1.6.0 (2025-12-30)
+------------------
+* Merge remote-tracking branch 'origin/main' into tmp/bot/bump_version_base
+* feat(autoware_lanelet2_utils): define remove_const in header (`#741 <https://github.com/autowarefoundation/autoware_core/issues/741>`_)
+  Co-authored-by: Junya Sasaki <j2sasaki1990@gmail.com>
+* chore: jazzy-porting: fix test depend launch-test missing (`#738 <https://github.com/autowarefoundation/autoware_core/issues/738>`_)
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* docs(lanelet2_utils): add example usage to autoware_lanelet2_utils documentation (`#720 <https://github.com/autowarefoundation/autoware_core/issues/720>`_)
+  * add lanelet2_utils geometry functions example
+  * add conversion functions example
+  * add kind functions example
+  * fix conversion code line after pre-commit format
+  * fix code snippet title typo
+  * add hatched_road_markings functions example
+  * fix cppcheck
+  * add topology functions example
+  * add intersection functions example
+  * add lane_sequence functions example
+  * add nn_search functions example
+  * add map_handler functions example
+  * add route_manager functions example
+  * fix shadow variable in example_map_handler
+  * fix small typo in example_map_handler
+  * remove map_handler question comment
+  * modify CMakeLists to support jazzy
+  * Update common/autoware_lanelet2_utils/CMakeLists.txt
+  ---------
+  Co-authored-by: Mamoru Sobue <hilo.soblin@gmail.com>
+* feat(trajectory): align build_reference_path with vm-01-11 spec (`#702 <https://github.com/autowarefoundation/autoware_core/issues/702>`_)
+  Co-authored-by: mitukou1109 <mitukou1109@gmail.com>
+* ci(pre-commit): autoupdate (`#723 <https://github.com/autowarefoundation/autoware_core/issues/723>`_)
+  * pre-commit formatting changes
+* Contributors: Mamoru Sobue, Mete Fatih Cırıt, Sarun MUKDAPITAK, github-actions, 心刚
+
+1.5.0 (2025-11-16)
+------------------
+* Merge remote-tracking branch 'origin/main' into humble
+* feat(lanelet2_utils): organize maps by vm-map-spec id (`#716 <https://github.com/autowarefoundation/autoware_core/issues/716>`_)
+* feat: replace `ament_auto_package` to `autoware_ament_auto_package` (`#700 <https://github.com/autowarefoundation/autoware_core/issues/700>`_)
+  * replace ament_auto_package to autoware_ament_auto_package
+  * style(pre-commit): autofix
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* feat(autoware_lanelet2_utils): port get_conflicting_lanelets (`#704 <https://github.com/autowarefoundation/autoware_core/issues/704>`_)
+* chore: jazzy-porting, autoware_lanelet2_utils, add missing link dependency yaml-cpp (`#686 <https://github.com/autowarefoundation/autoware_core/issues/686>`_)
+  Co-authored-by: Ryohsuke Mitsudome <ryohsuke.mitsudome@tier4.jp>
+* refactor(autoware_lanelet2_utils): refactor get_linestring_from_arc_length (`#688 <https://github.com/autowarefoundation/autoware_core/issues/688>`_)
+  change return type of Const, and use create_safe_linestring
+* feat(autoware_lanelet2_utils): port function from autoware_lanelet2_extension (`#693 <https://github.com/autowarefoundation/autoware_core/issues/693>`_)
+* docs(autoware_lanelet2_utils): write documentation for geometry  (`#689 <https://github.com/autowarefoundation/autoware_core/issues/689>`_)
+  * add geometry functions description
+  * capitalize table column name
+  * fix some descriptions
+  * add geometry illustration
+  * add more angle description
+  ---------
+  Co-authored-by: Junya Sasaki <j2sasaki1990@gmail.com>
+* feat(autoware_lanelet2_utils): create artificial lanelet object (`#669 <https://github.com/autowarefoundation/autoware_core/issues/669>`_)
+* feat(autoware_lanelet2_utils): remove the usage of getClosestSegment and getLaneletAngle  (`#658 <https://github.com/autowarefoundation/autoware_core/issues/658>`_)
+* feat(lanelet2_utils): update lanelet2_anonymizer (`#666 <https://github.com/autowarefoundation/autoware_core/issues/666>`_)
+  Co-authored-by: Junya Sasaki <j2sasaki1990@gmail.com>
+* docs(lanelet2_utils): make table more readable (`#657 <https://github.com/autowarefoundation/autoware_core/issues/657>`_)
+  docs(lanelet2_utils): divide table and make images bigger
+* feat(lanelet2_utils): add RouteManager class (`#653 <https://github.com/autowarefoundation/autoware_core/issues/653>`_)
+* feat(lanelet2_utils): add MapHandler class (minor change of `#651 <https://github.com/autowarefoundation/autoware_core/issues/651>`_) (`#656 <https://github.com/autowarefoundation/autoware_core/issues/656>`_)
+* chore(lanelet2_utils): revert `#651 <https://github.com/autowarefoundation/autoware_core/issues/651>`_ (`#654 <https://github.com/autowarefoundation/autoware_core/issues/654>`_)
+  Revert "feat(lanelet2_utils): add MapHandler class (`#651 <https://github.com/autowarefoundation/autoware_core/issues/651>`_)"
+  This reverts commit b44dc53f23b81d1713fc49c91074d638cd940234.
+* feat(lanelet2_utils): add MapHandler class (`#651 <https://github.com/autowarefoundation/autoware_core/issues/651>`_)
+* feat(lanelet2_utils): add LaneSequence class (`#650 <https://github.com/autowarefoundation/autoware_core/issues/650>`_)
+* feat(lanelet2_utils): add test_case_generator and nn_search module (`#649 <https://github.com/autowarefoundation/autoware_core/issues/649>`_)
+* feat(lanelet2_utils): port message conversion from lanelet2_extension (`#648 <https://github.com/autowarefoundation/autoware_core/issues/648>`_)
+  feat(route_handler): port message conversion from lanelet2_extension
+* feat(autoware_lanelet2_utils): porting functions from lanelet2_extension to autoware_lanelet2_utils package (`#621 <https://github.com/autowarefoundation/autoware_core/issues/621>`_)
+* feat(autoware_lanelet2_utils): unified point type conversion between lanelet types and ROS messages (`#642 <https://github.com/autowarefoundation/autoware_core/issues/642>`_)
+* fix(autoware_lanelet2_utils): fix the map to pass validation (`#645 <https://github.com/autowarefoundation/autoware_core/issues/645>`_)
+* chore: bump version (1.4.0) and update changelog (`#608 <https://github.com/autowarefoundation/autoware_core/issues/608>`_)
+* Contributors: Mamoru Sobue, Mete Fatih Cırıt, Sarun MUKDAPITAK, Yutaka Kondo, mitsudome-r, 心刚
+
 1.4.0 (2025-08-11)
 ------------------
 * Merge remote-tracking branch 'origin/main' into humble
