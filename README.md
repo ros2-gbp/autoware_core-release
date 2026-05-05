@@ -1,28 +1,8 @@
-# stop_filter
+# autoware_core
 
-## Purpose
+- An [Autoware](https://github.com/autowarefoundation/autoware) repository that contains a basic set of high-quality, stable ROS packages for autonomous driving.
 
-When this function did not exist, each node used a different criterion to determine whether the vehicle is stopping or not, resulting that some nodes were in operation of stopping the vehicle and some nodes continued running in the drive mode.
-This node aims to:
+- Although this repository is currently empty, porting of code from Universe to Core will begin once the interfaces for Autoware Core/Universe have been finalized, as per ongoing [Autoware Architecture WG](https://github.com/autowarefoundation/autoware/discussions?discussions_q=label%3Aarchitecture_wg) discussions.
+- A more detailed explanation about Autoware Core can be found on the [Autoware concepts documentation page](https://autowarefoundation.github.io/autoware-documentation/main/design/autoware-concepts/#the-core-module).
 
-- apply a uniform stopping decision criterion to several nodes.
-- suppress the control noise by overwriting the velocity and angular velocity with zero.
-
-## Inputs / Outputs
-
-### Input
-
-| Name         | Type                      | Description           |
-| ------------ | ------------------------- | --------------------- |
-| `input/odom` | `nav_msgs::msg::Odometry` | localization odometry |
-
-### Output
-
-| Name              | Type                                             | Description                                              |
-| ----------------- | ------------------------------------------------ | -------------------------------------------------------- |
-| `output/odom`     | `nav_msgs::msg::Odometry`                        | odometry with suppressed longitudinal and yaw twist      |
-| `debug/stop_flag` | `autoware_internal_debug_msgs::msg::BoolStamped` | flag to represent whether the vehicle is stopping or not |
-
-## Parameters
-
-{{ json_to_markdown("localization/autoware_stop_filter/schema/stop_filter.schema.json") }}
+- For researchers and developers who want to extend the functionality of Autoware Core with experimental, cutting-edge ROS packages, see [Autoware Universe](https://github.com/autowarefoundation/autoware_universe).
