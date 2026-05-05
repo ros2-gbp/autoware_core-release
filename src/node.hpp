@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE__GROUND_FILTER__NODE_HPP_
-#define AUTOWARE__GROUND_FILTER__NODE_HPP_
+#ifndef NODE_HPP_
+#define NODE_HPP_
 
-#include "autoware/ground_filter/data.hpp"
-#include "autoware/ground_filter/ground_filter.hpp"
+#include "data.hpp"
+#include "ground_filter.hpp"
 
 #include <autoware_utils_debug/time_keeper.hpp>
 #include <autoware_vehicle_info_utils/vehicle_info.hpp>
@@ -38,6 +38,7 @@
 #include <pcl_conversions/pcl_conversions.h>
 
 // PCL includes
+// cppcheck-suppress preprocessorErrorDirective
 #if __has_include(<message_filters/subscriber.hpp>)
 #include <message_filters/subscriber.hpp>
 #include <message_filters/sync_policies/approximate_time.hpp>
@@ -104,7 +105,6 @@ private:
   {
     float radius;  // cylindrical coords on XY Plane
     PointLabel point_state{PointLabel::INIT};
-    uint16_t grid_id;   // id of grid in vertical
     size_t data_index;  // index of this point data in the source pointcloud
   };
   using PointCloudVector = std::vector<PointData>;
@@ -118,7 +118,6 @@ private:
     float height_max;
     float height_min;
     uint32_t point_num;
-    uint16_t grid_id;
     std::vector<size_t> pcl_indices;
     std::vector<float> height_list;
     std::vector<float> radius_list;
@@ -130,8 +129,7 @@ private:
       height_avg(0.0f),
       height_max(-10.0f),
       height_min(10.0f),
-      point_num(0),
-      grid_id(0)
+      point_num(0)
     {
     }
 
@@ -144,7 +142,6 @@ private:
       height_max = -10.0f;
       height_min = 10.0f;
       point_num = 0;
-      grid_id = 0;
       pcl_indices.clear();
       height_list.clear();
     }
@@ -392,4 +389,4 @@ public:
 };
 }  // namespace autoware::ground_filter
 
-#endif  // AUTOWARE__GROUND_FILTER__NODE_HPP_
+#endif  // NODE_HPP_
