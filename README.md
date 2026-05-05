@@ -1,13 +1,8 @@
-# Autoware Core Perception
+# autoware_core
 
-## Overview
+- An [Autoware](https://github.com/autowarefoundation/autoware) repository that contains a basic set of high-quality, stable ROS packages for autonomous driving.
 
-The `autoware_core_perception` is a meta-package within the Autoware project, designed to manage and organize various perception modules essential for autonomous vehicle operations. This package serves as a central point for integrating different perception capabilities, such as object detection, tracking, and sensor fusion.
+- Although this repository is currently empty, porting of code from Universe to Core will begin once the interfaces for Autoware Core/Universe have been finalized, as per ongoing [Autoware Architecture WG](https://github.com/autowarefoundation/autoware/discussions?discussions_q=label%3Aarchitecture_wg) discussions.
+- A more detailed explanation about Autoware Core can be found on the [Autoware concepts documentation page](https://autowarefoundation.github.io/autoware-documentation/main/design/autoware-concepts/#the-core-module).
 
-## Usage
-
-The `autoware_core_perception` meta-package is used to launch and manage perception modules as part of the Autoware system. You can start the system using:
-
-```bash
-ros2 launch autoware_launch autoware.launch.xml
-```
+- For researchers and developers who want to extend the functionality of Autoware Core with experimental, cutting-edge ROS packages, see [Autoware Universe](https://github.com/autowarefoundation/autoware_universe).
