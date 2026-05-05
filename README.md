@@ -1,8 +1,50 @@
-# autoware_core
+# autoware_object_recognition_utils
 
-- An [Autoware](https://github.com/autowarefoundation/autoware) repository that contains a basic set of high-quality, stable ROS packages for autonomous driving.
+## Overview
 
-- Although this repository is currently empty, porting of code from Universe to Core will begin once the interfaces for Autoware Core/Universe have been finalized, as per ongoing [Autoware Architecture WG](https://github.com/autowarefoundation/autoware/discussions?discussions_q=label%3Aarchitecture_wg) discussions.
-- A more detailed explanation about Autoware Core can be found on the [Autoware concepts documentation page](https://autowarefoundation.github.io/autoware-documentation/main/design/autoware-concepts/#the-core-module).
+This package contains a library of common functions that are useful across the perception module and planning module.
 
-- For researchers and developers who want to extend the functionality of Autoware Core with experimental, cutting-edge ROS packages, see [Autoware Universe](https://github.com/autowarefoundation/autoware_universe).
+## Design
+
+### Conversion
+
+Ensuring accurate and efficient converting between DetectedObject and TrackedObject types.
+
+### Geometry
+
+It provides specialized implementations for each object type (e.g., DetectedObject, TrackedObject, and PredictedObject) to extract the pose information.
+
+### Matching
+
+It provides utility functions for calculating geometrical metrics, such as 2D IoU (Intersection over Union), GIoU (Generalized IoU), Precision, and Recall for objects. It also provides helper functions for computing areas of intersections, unions, and convex hulls of polygon
+
+### Object Classification
+
+Designed for processing and classifying detected objects, it implements the following functionalities:
+
+- Handling of vehicle category checks
+- Conversion between string class names and numerical labels
+- Probability-based classification selection
+- String representation of object labels
+
+### Predicted Path Utils
+
+Providing utility functions for handling predicted paths of objects. It includes the following functionalities:
+
+- calcInterpolatedPose: Calculates an interpolated pose from a predicted path based on a given time.
+- resamplePredictedPath (version 1): Resamples a predicted path according to a specified time vector, optionally using spline interpolation for smoother results.
+- resamplePredictedPath (version 2): Resamples a predicted path at regular time intervals, including the terminal point, with optional spline interpolation.
+
+## Usage
+
+include all-in-one header files if multiple functionalities are needed:
+
+```cpp
+#include <autoware_object_recognition_utils/object_recognition_utils.hpp>
+```
+
+include specific header files if only a subset of functionalities is needed:
+
+```cpp
+#include <autoware_object_recognition_utils/object_classifier.hpp>
+```
