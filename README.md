@@ -1,8 +1,33 @@
-# autoware_core
+# autoware_perception_objects_converter
 
-- An [Autoware](https://github.com/autowarefoundation/autoware) repository that contains a basic set of high-quality, stable ROS packages for autonomous driving.
+## Purpose
 
-- Although this repository is currently empty, porting of code from Universe to Core will begin once the interfaces for Autoware Core/Universe have been finalized, as per ongoing [Autoware Architecture WG](https://github.com/autowarefoundation/autoware/discussions?discussions_q=label%3Aarchitecture_wg) discussions.
-- A more detailed explanation about Autoware Core can be found on the [Autoware concepts documentation page](https://autowarefoundation.github.io/autoware-documentation/main/design/autoware-concepts/#the-core-module).
+This package provides nodes for converting between different perception object message types in Autoware.
 
-- For researchers and developers who want to extend the functionality of Autoware Core with experimental, cutting-edge ROS packages, see [Autoware Universe](https://github.com/autowarefoundation/autoware_universe).
+## Nodes
+
+### detected_to_predicted_objects_converter_node
+
+This node converts `DetectedObjects` messages to `PredictedObjects` messages.
+
+#### Input
+
+| Name                     | Type                                           | Description            |
+| :----------------------- | :--------------------------------------------- | :--------------------- |
+| `input/detected_objects` | autoware_perception_msgs::msg::DetectedObjects | Input detected objects |
+
+#### Output
+
+| Name                       | Type                                            | Description              |
+| :------------------------- | :---------------------------------------------- | :----------------------- |
+| `output/predicted_objects` | autoware_perception_msgs::msg::PredictedObjects | Output predicted objects |
+
+#### Parameters
+
+None
+
+## Usage
+
+```bash
+ros2 launch autoware_perception_objects_converter detected_to_predicted_objects.launch.xml
+```
