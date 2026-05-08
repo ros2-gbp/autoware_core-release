@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-crop-box-filter
+Section: misc
+Priority: optional
+Maintainer: "amc-nu" <abrahammonrroy@yahoo.com>
+Build-Depends: debhelper (>= 9.0.0), ros-jazzy-ament-cmake-auto, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-autoware-cmake, ros-jazzy-autoware-lint-common <!nocheck>, ros-jazzy-autoware-point-types, ros-jazzy-autoware-utils-debug, ros-jazzy-autoware-utils-system, ros-jazzy-autoware-utils-tf, ros-jazzy-geometry-msgs, ros-jazzy-rclcpp, ros-jazzy-rclcpp-components, ros-jazzy-sensor-msgs, ros-jazzy-tf2-eigen, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_crop_box_filter/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-crop-box-filter
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-jazzy-autoware-point-types, ros-jazzy-autoware-utils-debug, ros-jazzy-autoware-utils-system, ros-jazzy-autoware-utils-tf, ros-jazzy-geometry-msgs, ros-jazzy-rclcpp, ros-jazzy-rclcpp-components, ros-jazzy-sensor-msgs, ros-jazzy-tf2-eigen, ros-jazzy-ros-workspace
+Description: The ROS 2 autoware_crop_box_filter package
