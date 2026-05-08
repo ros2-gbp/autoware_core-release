@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-test-utils
+Section: misc
+Priority: optional
+Maintainer: "Kyoichi Sugahara" <kyoichi.sugahara@tier4.jp>
+Build-Depends: debhelper (>= 9.0.0), ros-jazzy-ament-cmake-auto, ros-jazzy-ament-cmake-ros <!nocheck>, ros-jazzy-ament-index-cpp, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-autoware-adapi-v1-msgs, ros-jazzy-autoware-cmake, ros-jazzy-autoware-internal-planning-msgs, ros-jazzy-autoware-lanelet2-extension, ros-jazzy-autoware-lint-common <!nocheck>, ros-jazzy-autoware-map-msgs, ros-jazzy-autoware-perception-msgs, ros-jazzy-autoware-planning-msgs, ros-jazzy-autoware-pyplot <!nocheck>, ros-jazzy-autoware-utils-geometry, ros-jazzy-lanelet2-io, ros-jazzy-nav-msgs, ros-jazzy-rclcpp, ros-jazzy-std-srvs, ros-jazzy-tf2-msgs, ros-jazzy-tf2-ros, ros-jazzy-unique-identifier-msgs, ros-jazzy-yaml-cpp-vendor, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_test_utils/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-test-utils
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-jazzy-ament-index-cpp, ros-jazzy-autoware-adapi-v1-msgs, ros-jazzy-autoware-internal-planning-msgs, ros-jazzy-autoware-lanelet2-extension, ros-jazzy-autoware-map-msgs, ros-jazzy-autoware-perception-msgs, ros-jazzy-autoware-planning-msgs, ros-jazzy-autoware-utils-geometry, ros-jazzy-lanelet2-io, ros-jazzy-nav-msgs, ros-jazzy-rclcpp, ros-jazzy-std-srvs, ros-jazzy-tf2-msgs, ros-jazzy-tf2-ros, ros-jazzy-unique-identifier-msgs, ros-jazzy-yaml-cpp-vendor, ros-jazzy-ros-workspace
+Description: ROS 2 node for testing interface of the nodes in planning module
