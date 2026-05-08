@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-signal-processing
+Section: misc
+Priority: optional
+Maintainer: "Takayuki Murooka" <takayuki.murooka@tier4.jp>
+Build-Depends: debhelper (>= 9.0.0), libboost-dev, ros-jazzy-ament-cmake-auto, ros-jazzy-ament-cmake-ros <!nocheck>, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-autoware-cmake, ros-jazzy-autoware-lint-common <!nocheck>, ros-jazzy-geometry-msgs, ros-jazzy-rclcpp, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_signal_processing/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-signal-processing
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libboost-dev, ros-jazzy-geometry-msgs, ros-jazzy-rclcpp, ros-jazzy-ros-workspace
+Description: The signal processing package
