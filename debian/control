@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-lanelet2-utils
+Section: misc
+Priority: optional
+Maintainer: "Mamoru Sobue" <mamoru.sobue@tier4.jp>
+Build-Depends: debhelper (>= 9.0.0), librange-v3-dev, libyaml-cpp-dev <!nocheck>, ros-jazzy-ament-cmake-auto, ros-jazzy-ament-cmake-ros <!nocheck>, ros-jazzy-ament-index-cpp <!nocheck>, ros-jazzy-autoware-cmake, ros-jazzy-autoware-lanelet2-extension, ros-jazzy-autoware-map-msgs, ros-jazzy-autoware-planning-msgs, ros-jazzy-autoware-pyplot <!nocheck>, ros-jazzy-autoware-test-utils <!nocheck>, ros-jazzy-autoware-utils-geometry, ros-jazzy-autoware-utils-math, ros-jazzy-rclcpp, ros-jazzy-rclpy-message-converter <!nocheck>, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_lanelet2_utils/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-lanelet2-utils
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, librange-v3-dev, ros-jazzy-autoware-lanelet2-extension, ros-jazzy-autoware-map-msgs, ros-jazzy-autoware-planning-msgs, ros-jazzy-autoware-utils-geometry, ros-jazzy-autoware-utils-math, ros-jazzy-rclcpp, ros-jazzy-ros-workspace
+Description: The autoware_lanelet2_utils package
