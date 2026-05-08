@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-velocity-smoother
+Section: misc
+Priority: optional
+Maintainer: "Takumi Odashima" <takumi.odashima@tier4.jp>
+Build-Depends: debhelper (>= 9.0.0), ros-jazzy-ament-cmake-auto, ros-jazzy-ament-cmake-ros <!nocheck>, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-autoware-cmake, ros-jazzy-autoware-internal-debug-msgs, ros-jazzy-autoware-internal-planning-msgs, ros-jazzy-autoware-interpolation, ros-jazzy-autoware-lint-common <!nocheck>, ros-jazzy-autoware-motion-utils, ros-jazzy-autoware-osqp-interface, ros-jazzy-autoware-planning-msgs, ros-jazzy-autoware-planning-test-manager, ros-jazzy-autoware-qp-interface, ros-jazzy-autoware-trajectory, ros-jazzy-autoware-utils-debug, ros-jazzy-autoware-utils-diagnostics, ros-jazzy-autoware-utils-geometry, ros-jazzy-autoware-utils-logging, ros-jazzy-autoware-utils-math, ros-jazzy-autoware-utils-rclcpp, ros-jazzy-autoware-vehicle-info-utils, ros-jazzy-eigen3-cmake-module, ros-jazzy-geometry-msgs, ros-jazzy-nav-msgs, ros-jazzy-rclcpp, ros-jazzy-tf2, ros-jazzy-tf2-ros, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_velocity_smoother/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-velocity-smoother
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-jazzy-autoware-internal-debug-msgs, ros-jazzy-autoware-internal-planning-msgs, ros-jazzy-autoware-interpolation, ros-jazzy-autoware-motion-utils, ros-jazzy-autoware-osqp-interface, ros-jazzy-autoware-planning-msgs, ros-jazzy-autoware-planning-test-manager, ros-jazzy-autoware-qp-interface, ros-jazzy-autoware-trajectory, ros-jazzy-autoware-utils-debug, ros-jazzy-autoware-utils-diagnostics, ros-jazzy-autoware-utils-geometry, ros-jazzy-autoware-utils-logging, ros-jazzy-autoware-utils-math, ros-jazzy-autoware-utils-rclcpp, ros-jazzy-autoware-vehicle-info-utils, ros-jazzy-geometry-msgs, ros-jazzy-nav-msgs, ros-jazzy-rclcpp, ros-jazzy-tf2, ros-jazzy-tf2-ros, ros-jazzy-ros-workspace
+Description: The autoware_velocity_smoother package
