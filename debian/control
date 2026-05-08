@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-core-map
+Section: misc
+Priority: optional
+Maintainer: "Ryohsuke Mitsudome" <ryohsuke.mitsudome@tier4.jp>
+Build-Depends: debhelper (>= 9.0.0), ros-jazzy-ament-cmake-auto, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-autoware-cmake, ros-jazzy-autoware-lint-common <!nocheck>, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_core_map/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-core-map
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-jazzy-autoware-lanelet2-map-visualizer, ros-jazzy-autoware-map-loader, ros-jazzy-autoware-map-projection-loader, ros-jazzy-ros-workspace
+Description: The autoware_core_map package
