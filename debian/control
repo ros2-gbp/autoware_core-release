@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-agnocast-wrapper
+Section: misc
+Priority: optional
+Maintainer: "Takahiro Ishikawa-Aso" <sykwer@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), ros-jazzy-ament-cmake-auto, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-autoware-cmake, ros-jazzy-autoware-lint-common <!nocheck>, ros-jazzy-autoware-utils-rclcpp, ros-jazzy-class-loader, ros-jazzy-message-filters, ros-jazzy-rclcpp, ros-jazzy-rclcpp-components, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_agnocast_wrapper/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-agnocast-wrapper
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-jazzy-autoware-utils-rclcpp, ros-jazzy-class-loader, ros-jazzy-message-filters, ros-jazzy-rclcpp, ros-jazzy-rclcpp-components, ros-jazzy-ros-workspace
+Description: Wrapper macros for Agnocast (true zero-copy communication library)
