@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-vehicle-info-utils
+Section: misc
+Priority: optional
+Maintainer: "Taiki Tanaka" <taiki.tanaka@tier4.jp>
+Build-Depends: debhelper (>= 9.0.0), ros-jazzy-ament-cmake-auto, ros-jazzy-ament-cmake-ros <!nocheck>, ros-jazzy-ament-index-cpp <!nocheck>, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-autoware-cmake, ros-jazzy-autoware-lint-common <!nocheck>, ros-jazzy-autoware-utils-geometry, ros-jazzy-rclcpp, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_vehicle_info_utils/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-vehicle-info-utils
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-jazzy-autoware-utils-geometry, ros-jazzy-rclcpp, ros-jazzy-ros-workspace
+Description: The autoware_vehicle_info_utils package
