@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-map-loader
+Section: misc
+Priority: optional
+Maintainer: "Yamato Ando" <yamato.ando@tier4.jp>
+Build-Depends: debhelper (>= 9.0.0), libfmt-dev, libpcl-dev, libyaml-cpp-dev, ros-jazzy-ament-cmake-auto, ros-jazzy-ament-cmake-gmock <!nocheck>, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-autoware-cmake, ros-jazzy-autoware-component-interface-specs, ros-jazzy-autoware-geography-utils, ros-jazzy-autoware-lanelet2-extension, ros-jazzy-autoware-lanelet2-utils, ros-jazzy-autoware-lint-common <!nocheck>, ros-jazzy-autoware-map-msgs, ros-jazzy-geometry-msgs, ros-jazzy-launch-testing-ament-cmake <!nocheck>, ros-jazzy-pcl-conversions, ros-jazzy-rclcpp, ros-jazzy-rclcpp-components, ros-jazzy-ros-testing <!nocheck>, ros-jazzy-visualization-msgs, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_map_loader/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-map-loader
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libfmt-dev, libpcl-dev, libyaml-cpp-dev, ros-jazzy-autoware-component-interface-specs, ros-jazzy-autoware-geography-utils, ros-jazzy-autoware-lanelet2-extension, ros-jazzy-autoware-lanelet2-utils, ros-jazzy-autoware-map-msgs, ros-jazzy-geometry-msgs, ros-jazzy-pcl-conversions, ros-jazzy-rclcpp, ros-jazzy-rclcpp-components, ros-jazzy-visualization-msgs, ros-jazzy-ros-workspace
+Description: The autoware_map_loader package
