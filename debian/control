@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-adapi-adaptors
+Section: misc
+Priority: optional
+Maintainer: "Takagi, Isamu" <isamu.takagi@tier4.jp>
+Build-Depends: debhelper (>= 9.0.0), ros-jazzy-ament-cmake-auto, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-autoware-adapi-specs, ros-jazzy-autoware-adapi-v1-msgs, ros-jazzy-autoware-cmake, ros-jazzy-autoware-component-interface-specs, ros-jazzy-autoware-lint-common <!nocheck>, ros-jazzy-autoware-map-height-fitter, ros-jazzy-autoware-qos-utils, ros-jazzy-rclcpp, ros-jazzy-rclcpp-components, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_adapi_adaptors/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-adapi-adaptors
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-jazzy-autoware-adapi-specs, ros-jazzy-autoware-adapi-v1-msgs, ros-jazzy-autoware-component-interface-specs, ros-jazzy-autoware-map-height-fitter, ros-jazzy-autoware-qos-utils, ros-jazzy-rclcpp, ros-jazzy-rclcpp-components, ros-jazzy-ros-workspace
+Description: The adapi_adaptors package
