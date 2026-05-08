@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-gnss-poser
+Section: misc
+Priority: optional
+Maintainer: "Xingang Liu" <lxg19892021@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), libboost-dev, libgeographiclib-dev, ros-jazzy-ament-cmake-auto, ros-jazzy-ament-cmake-ros <!nocheck>, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-autoware-cmake, ros-jazzy-autoware-geography-utils, ros-jazzy-autoware-internal-debug-msgs, ros-jazzy-autoware-lint-common <!nocheck>, ros-jazzy-autoware-map-msgs, ros-jazzy-autoware-sensing-msgs, ros-jazzy-geographic-msgs, ros-jazzy-geometry-msgs, ros-jazzy-rclcpp, ros-jazzy-rclcpp-components, ros-jazzy-sensor-msgs, ros-jazzy-tf2, ros-jazzy-tf2-geometry-msgs, ros-jazzy-tf2-ros, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_gnss_poser/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-gnss-poser
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libgeographiclib-dev, ros-jazzy-autoware-geography-utils, ros-jazzy-autoware-internal-debug-msgs, ros-jazzy-autoware-map-msgs, ros-jazzy-autoware-sensing-msgs, ros-jazzy-geographic-msgs, ros-jazzy-geometry-msgs, ros-jazzy-rclcpp, ros-jazzy-rclcpp-components, ros-jazzy-sensor-msgs, ros-jazzy-tf2, ros-jazzy-tf2-geometry-msgs, ros-jazzy-tf2-ros, ros-jazzy-ros-workspace
+Description: The ROS 2 autoware_gnss_poser package
