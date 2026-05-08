@@ -1,8 +1,13 @@
-# autoware_core
+# Signal Processing Methods
 
-- An [Autoware](https://github.com/autowarefoundation/autoware) repository that contains a basic set of high-quality, stable ROS packages for autonomous driving.
+In this package, we present signal processing related methods for the Autoware applications. The following
+functionalities are available in the current version.
 
-- Although this repository is currently empty, porting of code from Universe to Core will begin once the interfaces for Autoware Core/Universe have been finalized, as per ongoing [Autoware Architecture WG](https://github.com/autowarefoundation/autoware/discussions?discussions_q=label%3Aarchitecture_wg) discussions.
-- A more detailed explanation about Autoware Core can be found on the [Autoware concepts documentation page](https://autowarefoundation.github.io/autoware-documentation/main/design/autoware-concepts/#the-core-module).
+- an 1-D Low-pass filter,
+- [Butterworth low-pass filter tools.](documentation/ButterworthFilter.md)
 
-- For researchers and developers who want to extend the functionality of Autoware Core with experimental, cutting-edge ROS packages, see [Autoware Universe](https://github.com/autowarefoundation/autoware_universe).
+low-pass filter currently supports only the 1-D low pass filtering.
+
+## Assumptions / Known limits
+
+TBD.
