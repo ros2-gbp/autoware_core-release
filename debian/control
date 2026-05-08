@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-testing
+Section: misc
+Priority: optional
+Maintainer: "Adam Dabrowski" <adam.dabrowski@robotec.ai>
+Build-Depends: debhelper (>= 9.0.0), ros-jazzy-ament-cmake-auto, ros-jazzy-ament-cmake-core <!nocheck>, ros-jazzy-ament-cmake-lint-cmake, ros-jazzy-ament-copyright <!nocheck>, ros-jazzy-ament-flake8 <!nocheck>, ros-jazzy-ament-pep257 <!nocheck>, ros-jazzy-autoware-cmake, ros-jazzy-ros-testing <!nocheck>, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_testing/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-testing
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-jazzy-ros-testing, ros-jazzy-ros-workspace
+Description: Tools for handling standard tests based on ros_testing
