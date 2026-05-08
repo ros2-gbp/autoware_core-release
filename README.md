@@ -1,8 +1,21 @@
-# autoware_core
+# autoware_core_vehicle
 
-- An [Autoware](https://github.com/autowarefoundation/autoware) repository that contains a basic set of high-quality, stable ROS packages for autonomous driving.
+## Overview
 
-- Although this repository is currently empty, porting of code from Universe to Core will begin once the interfaces for Autoware Core/Universe have been finalized, as per ongoing [Autoware Architecture WG](https://github.com/autowarefoundation/autoware/discussions?discussions_q=label%3Aarchitecture_wg) discussions.
-- A more detailed explanation about Autoware Core can be found on the [Autoware concepts documentation page](https://autowarefoundation.github.io/autoware-documentation/main/design/autoware-concepts/#the-core-module).
+The `autoware_core_vehicle` package is a part of the Autoware Core system, responsible for interfacing with vehicle hardware and managing vehicle-specific operations. This package provides essential functionalities for vehicle control and communication within the Autoware ecosystem.
 
-- For researchers and developers who want to extend the functionality of Autoware Core with experimental, cutting-edge ROS packages, see [Autoware Universe](https://github.com/autowarefoundation/autoware_universe).
+## Features
+
+- Vehicle driver interface
+- Loading URDF model
+
+## Configuration
+
+The package can be configured using the following parameters:
+
+- `vehicle_model`: Specifies the package that contains urdf for vehicle model to be used.
+- `sensor_model`: Specifies the package that contains urdf for sensor models to be used.
+
+## Launch Files
+
+- `vehicle.launch.xml`: Main launch file for vehicle operations.
