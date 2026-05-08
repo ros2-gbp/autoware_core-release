@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-planning-factor-interface
+Section: misc
+Priority: optional
+Maintainer: "Satoshi Ota" <satoshi.ota@tier4.jp>
+Build-Depends: debhelper (>= 9.0.0), ros-jazzy-ament-cmake-auto, ros-jazzy-ament-cmake-ros <!nocheck>, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-autoware-cmake, ros-jazzy-autoware-internal-planning-msgs, ros-jazzy-autoware-lint-common <!nocheck>, ros-jazzy-autoware-motion-utils, ros-jazzy-autoware-planning-msgs, ros-jazzy-rclcpp, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_planning_factor_interface/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-planning-factor-interface
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-jazzy-autoware-internal-planning-msgs, ros-jazzy-autoware-motion-utils, ros-jazzy-autoware-planning-msgs, ros-jazzy-rclcpp, ros-jazzy-ros-workspace
+Description: The autoware_planning_factor_interface package
