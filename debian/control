@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-vehicle-velocity-converter
+Section: misc
+Priority: optional
+Maintainer: "Masahiro Sakamoto" <masahiro.sakamoto@tier4.jp>
+Build-Depends: debhelper (>= 9.0.0), ros-jazzy-ament-cmake-auto, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-autoware-agnocast-wrapper, ros-jazzy-autoware-cmake, ros-jazzy-autoware-lint-common <!nocheck>, ros-jazzy-autoware-vehicle-msgs, ros-jazzy-geometry-msgs, ros-jazzy-rclcpp, ros-jazzy-rclcpp-components, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_vehicle_velocity_converter/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-vehicle-velocity-converter
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-jazzy-autoware-agnocast-wrapper, ros-jazzy-autoware-vehicle-msgs, ros-jazzy-geometry-msgs, ros-jazzy-rclcpp, ros-jazzy-rclcpp-components, ros-jazzy-ros-workspace
+Description: The autoware_vehicle_velocity_converter package
