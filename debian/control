@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-pyplot
+Section: misc
+Priority: optional
+Maintainer: "Mamoru Sobue" <mamoru.sobue@tier4.jp>
+Build-Depends: debhelper (>= 9.0.0), python3-dev, python3-matplotlib, ros-jazzy-ament-cmake-auto, ros-jazzy-ament-cmake-ros <!nocheck>, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-autoware-cmake, ros-jazzy-autoware-lint-common <!nocheck>, ros-jazzy-pybind11-vendor, ros-jazzy-python-cmake-module, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_pyplot/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-pyplot
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, python3-dev, python3-matplotlib, ros-jazzy-pybind11-vendor, ros-jazzy-ros-workspace
+Description: C++ interface for matplotlib based on pybind11
