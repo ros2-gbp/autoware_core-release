@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-planning-topic-converter
+Section: misc
+Priority: optional
+Maintainer: "Satoshi OTA" <satoshi.ota@tier4.jp>
+Build-Depends: debhelper (>= 9.0.0), ros-jazzy-ament-cmake-auto, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-autoware-cmake, ros-jazzy-autoware-lint-common <!nocheck>, ros-jazzy-autoware-motion-utils, ros-jazzy-autoware-planning-msgs, ros-jazzy-autoware-utils-geometry, ros-jazzy-rclcpp, ros-jazzy-rclcpp-components, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_planning_topic_converter/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-planning-topic-converter
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-jazzy-autoware-motion-utils, ros-jazzy-autoware-planning-msgs, ros-jazzy-autoware-utils-geometry, ros-jazzy-rclcpp, ros-jazzy-rclcpp-components, ros-jazzy-ros-workspace
+Description: The autoware_planning_topic_converter package
