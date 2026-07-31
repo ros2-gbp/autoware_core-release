@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-interpolation
+Section: misc
+Priority: optional
+Maintainer: "Fumiya Watanabe" <fumiya.watanabe@tier4.jp>
+Build-Depends: debhelper (>= 9.0.0), libeigen3-dev, ros-jazzy-ament-cmake-auto, ros-jazzy-ament-cmake-ros <!nocheck>, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-autoware-cmake, ros-jazzy-autoware-lint-common <!nocheck>, ros-jazzy-autoware-utils-geometry, ros-jazzy-geometry-msgs, ros-jazzy-tf2, ros-jazzy-tf2-geometry-msgs, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_interpolation/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-interpolation
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libeigen3-dev, ros-jazzy-autoware-utils-geometry, ros-jazzy-geometry-msgs, ros-jazzy-tf2, ros-jazzy-tf2-geometry-msgs, ros-jazzy-ros-workspace
+Description: The spline interpolation package
