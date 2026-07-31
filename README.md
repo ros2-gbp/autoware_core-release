@@ -1,28 +1,8 @@
-# autoware_twist2accel
+# autoware_core
 
-## Purpose
+- An [Autoware](https://github.com/autowarefoundation/autoware) repository that contains a basic set of high-quality, stable ROS packages for autonomous driving.
 
-This package is responsible for estimating acceleration using the output of `ekf_localizer`. It uses lowpass filter to mitigate the noise.
+- Although this repository is currently empty, porting of code from Universe to Core will begin once the interfaces for Autoware Core/Universe have been finalized, as per ongoing [Autoware Architecture WG](https://github.com/autowarefoundation/autoware/discussions?discussions_q=label%3Aarchitecture_wg) discussions.
+- A more detailed explanation about Autoware Core can be found on the [Autoware concepts documentation page](https://autowarefoundation.github.io/autoware-documentation/main/design/autoware-concepts/#the-core-module).
 
-## Inputs / Outputs
-
-### Input
-
-| Name          | Type                                             | Description           |
-| ------------- | ------------------------------------------------ | --------------------- |
-| `input/odom`  | `nav_msgs::msg::Odometry`                        | localization odometry |
-| `input/twist` | `geometry_msgs::msg::TwistWithCovarianceStamped` | twist                 |
-
-### Output
-
-| Name           | Type                                             | Description            |
-| -------------- | ------------------------------------------------ | ---------------------- |
-| `output/accel` | `geometry_msgs::msg::AccelWithCovarianceStamped` | estimated acceleration |
-
-## Parameters
-
-{{ json_to_markdown("localization/autoware_twist2accel/schema/twist2accel.schema.json") }}
-
-## Future work
-
-Future work includes integrating acceleration into the EKF state.
+- For researchers and developers who want to extend the functionality of Autoware Core with experimental, cutting-edge ROS packages, see [Autoware Universe](https://github.com/autowarefoundation/autoware_universe).
