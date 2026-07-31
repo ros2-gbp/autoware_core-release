@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-objects-of-interest-marker-interface
+Section: misc
+Priority: optional
+Maintainer: "Xingang Liu" <lxg19892021@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), ros-jazzy-ament-cmake-auto, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-autoware-cmake, ros-jazzy-autoware-lint-common <!nocheck>, ros-jazzy-autoware-perception-msgs, ros-jazzy-autoware-utils-geometry, ros-jazzy-autoware-utils-math, ros-jazzy-autoware-utils-visualization, ros-jazzy-geometry-msgs, ros-jazzy-rclcpp, ros-jazzy-std-msgs, ros-jazzy-visualization-msgs, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_objects_of_interest_marker_interface/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-objects-of-interest-marker-interface
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-jazzy-autoware-perception-msgs, ros-jazzy-autoware-utils-geometry, ros-jazzy-autoware-utils-math, ros-jazzy-autoware-utils-visualization, ros-jazzy-geometry-msgs, ros-jazzy-rclcpp, ros-jazzy-std-msgs, ros-jazzy-visualization-msgs, ros-jazzy-ros-workspace
+Description: The autoware_objects_of_interest_marker_interface package
