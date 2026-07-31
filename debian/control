@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-component-interface-specs
+Section: misc
+Priority: optional
+Maintainer: "Takagi, Isamu" <isamu.takagi@tier4.jp>
+Build-Depends: debhelper (>= 9.0.0), ros-jazzy-ament-cmake-auto, ros-jazzy-ament-cmake-gtest <!nocheck>, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-autoware-adapi-v1-msgs, ros-jazzy-autoware-cmake, ros-jazzy-autoware-control-msgs, ros-jazzy-autoware-lint-common <!nocheck>, ros-jazzy-autoware-localization-msgs, ros-jazzy-autoware-map-msgs, ros-jazzy-autoware-perception-msgs, ros-jazzy-autoware-planning-msgs, ros-jazzy-autoware-system-msgs, ros-jazzy-autoware-vehicle-msgs, ros-jazzy-nav-msgs, ros-jazzy-rcl, ros-jazzy-rclcpp, ros-jazzy-rosidl-runtime-cpp, ros-jazzy-sensor-msgs, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_component_interface_specs/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-component-interface-specs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-jazzy-autoware-adapi-v1-msgs, ros-jazzy-autoware-control-msgs, ros-jazzy-autoware-localization-msgs, ros-jazzy-autoware-map-msgs, ros-jazzy-autoware-perception-msgs, ros-jazzy-autoware-planning-msgs, ros-jazzy-autoware-system-msgs, ros-jazzy-autoware-vehicle-msgs, ros-jazzy-nav-msgs, ros-jazzy-rcl, ros-jazzy-rclcpp, ros-jazzy-rosidl-runtime-cpp, ros-jazzy-sensor-msgs, ros-jazzy-ros-workspace
+Description: The autoware_component_interface_specs package
