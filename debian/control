@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-marker-utils
+Section: misc
+Priority: optional
+Maintainer: "Kosuke Takeuchi" <kosuke.takeuchi@tier4.jp>
+Build-Depends: debhelper (>= 9.0.0), libboost-all-dev, librange-v3-dev, ros-jazzy-ament-cmake-auto, ros-jazzy-ament-cmake-ros <!nocheck>, ros-jazzy-ament-index-cpp <!nocheck>, ros-jazzy-autoware-cmake, ros-jazzy-autoware-lanelet2-extension, ros-jazzy-autoware-perception-msgs, ros-jazzy-autoware-planning-msgs, ros-jazzy-autoware-utils-geometry, ros-jazzy-autoware-utils-visualization, ros-jazzy-autoware-vehicle-info-utils, ros-jazzy-rclcpp, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_marker_utils/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-marker-utils
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libboost-all-dev, librange-v3-dev, ros-jazzy-autoware-lanelet2-extension, ros-jazzy-autoware-perception-msgs, ros-jazzy-autoware-planning-msgs, ros-jazzy-autoware-utils-geometry, ros-jazzy-autoware-utils-visualization, ros-jazzy-autoware-vehicle-info-utils, ros-jazzy-rclcpp, ros-jazzy-ros-workspace
+Description: The autoware_marker_utils package
