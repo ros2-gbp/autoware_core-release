@@ -1,0 +1,12 @@
+Source: ros-humble-autoware-command-gate
+Section: misc
+Priority: optional
+Maintainer: "Junya Sasaki" <junya.sasaki@tier4.jp>
+Build-Depends: debhelper (>= 9.0.0), ros-humble-ament-cmake-auto, ros-humble-ament-cmake-gtest <!nocheck>, ros-humble-ament-cmake-ros <!nocheck>, ros-humble-autoware-adapi-specs, ros-humble-autoware-adapi-v1-msgs, ros-humble-autoware-cmake, ros-humble-autoware-common-msgs, ros-humble-autoware-component-interface-specs, ros-humble-autoware-system-msgs, ros-humble-autoware-vehicle-msgs, ros-humble-builtin-interfaces, ros-humble-class-loader <!nocheck>, ros-humble-rclcpp, ros-humble-rclcpp-components, ros-humble-ros-workspace
+Homepage: https://index.ros.org/p/autoware_command_gate/#humble
+Standards-Version: 3.9.2
+
+Package: ros-humble-autoware-command-gate
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-humble-autoware-adapi-specs, ros-humble-autoware-adapi-v1-msgs, ros-humble-autoware-common-msgs, ros-humble-autoware-component-interface-specs, ros-humble-autoware-system-msgs, ros-humble-autoware-vehicle-msgs, ros-humble-builtin-interfaces, ros-humble-rclcpp, ros-humble-rclcpp-components, ros-humble-ros-workspace
+Description: Simple gateway that maps operation mode service calls to mode state and gear commands.
