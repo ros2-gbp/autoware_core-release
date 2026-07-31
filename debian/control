@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-core-api
+Section: misc
+Priority: optional
+Maintainer: "Ryohsuke Mitsudome" <ryohsuke.mitsudome@tier4.jp>
+Build-Depends: debhelper (>= 9.0.0), ros-jazzy-ament-cmake-auto, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-autoware-cmake, ros-jazzy-autoware-lint-common <!nocheck>, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_core_api/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-core-api
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-jazzy-autoware-adapi-adaptors, ros-jazzy-autoware-default-adapi, ros-jazzy-ros-workspace
+Description: The autoware_core_api package
