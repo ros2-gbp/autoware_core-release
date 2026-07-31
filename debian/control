@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-qp-interface
+Section: misc
+Priority: optional
+Maintainer: "Takayuki Murooka" <takayuki.murooka@tier4.jp>
+Build-Depends: debhelper (>= 9.0.0), libeigen3-dev, libeigen3-dev <!nocheck>, ros-jazzy-ament-cmake-auto, ros-jazzy-ament-cmake-ros <!nocheck>, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-autoware-cmake, ros-jazzy-autoware-lint-common <!nocheck>, ros-jazzy-osqp-vendor, ros-jazzy-proxsuite, ros-jazzy-rclcpp, ros-jazzy-rclcpp-components, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_qp_interface/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-qp-interface
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libeigen3-dev, ros-jazzy-osqp-vendor, ros-jazzy-proxsuite, ros-jazzy-rclcpp, ros-jazzy-rclcpp-components, ros-jazzy-ros-workspace
+Description: Interface for the QP solvers
