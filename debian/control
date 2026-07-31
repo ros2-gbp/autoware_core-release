@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-route-handler
+Section: misc
+Priority: optional
+Maintainer: "Zulfaqar Azmi" <zulfaqar.azmi@tier4.jp>
+Build-Depends: debhelper (>= 9.0.0), libyaml-cpp-dev, ros-jazzy-ament-cmake-auto, ros-jazzy-ament-cmake-ros <!nocheck>, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-autoware-cmake, ros-jazzy-autoware-lanelet2-extension, ros-jazzy-autoware-lanelet2-utils, ros-jazzy-autoware-lint-common <!nocheck>, ros-jazzy-autoware-map-msgs, ros-jazzy-autoware-planning-msgs, ros-jazzy-autoware-pyplot <!nocheck>, ros-jazzy-autoware-test-utils <!nocheck>, ros-jazzy-autoware-trajectory, ros-jazzy-autoware-utils-geometry, ros-jazzy-autoware-utils-math, ros-jazzy-geometry-msgs, ros-jazzy-rclcpp, ros-jazzy-rclcpp-components, ros-jazzy-tf2-ros, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_route_handler/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-route-handler
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libyaml-cpp-dev, ros-jazzy-autoware-lanelet2-extension, ros-jazzy-autoware-lanelet2-utils, ros-jazzy-autoware-map-msgs, ros-jazzy-autoware-planning-msgs, ros-jazzy-autoware-trajectory, ros-jazzy-autoware-utils-geometry, ros-jazzy-autoware-utils-math, ros-jazzy-geometry-msgs, ros-jazzy-rclcpp, ros-jazzy-rclcpp-components, ros-jazzy-tf2-ros, ros-jazzy-ros-workspace
+Description: The route_handling package
