@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-gyro-odometer
+Section: misc
+Priority: optional
+Maintainer: "Yamato Ando" <yamato.ando@tier4.jp>
+Build-Depends: debhelper (>= 9.0.0), libfmt-dev, ros-jazzy-ament-cmake-auto, ros-jazzy-ament-cmake-ros <!nocheck>, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-autoware-agnocast-wrapper, ros-jazzy-autoware-cmake, ros-jazzy-autoware-lint-common <!nocheck>, ros-jazzy-autoware-localization-util, ros-jazzy-autoware-utils-diagnostics, ros-jazzy-autoware-utils-geometry, ros-jazzy-autoware-utils-logging, ros-jazzy-autoware-utils-tf, ros-jazzy-diagnostic-msgs, ros-jazzy-geometry-msgs, ros-jazzy-rclcpp, ros-jazzy-rclcpp-components, ros-jazzy-sensor-msgs, ros-jazzy-tf2, ros-jazzy-tf2-geometry-msgs, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_gyro_odometer/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-gyro-odometer
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libfmt-dev, ros-jazzy-autoware-agnocast-wrapper, ros-jazzy-autoware-localization-util, ros-jazzy-autoware-utils-diagnostics, ros-jazzy-autoware-utils-geometry, ros-jazzy-autoware-utils-logging, ros-jazzy-autoware-utils-tf, ros-jazzy-diagnostic-msgs, ros-jazzy-geometry-msgs, ros-jazzy-rclcpp, ros-jazzy-rclcpp-components, ros-jazzy-sensor-msgs, ros-jazzy-tf2, ros-jazzy-tf2-geometry-msgs, ros-jazzy-ros-workspace
+Description: The autoware_gyro_odometer package as a ROS 2 node
