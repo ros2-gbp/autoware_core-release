@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-sample-vehicle-description
+Section: misc
+Priority: optional
+Maintainer: "Ryohsuke Mitsudome" <ryohsuke.mitsudome@tier4.jp>
+Build-Depends: debhelper (>= 9.0.0), ros-jazzy-ament-cmake-auto, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_sample_vehicle_description/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-sample-vehicle-description
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-jazzy-xacro, ros-jazzy-ros-workspace
+Description: The autoware_sample_vehicle_description package
