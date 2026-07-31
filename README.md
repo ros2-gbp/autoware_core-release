@@ -1,8 +1,47 @@
-# autoware_core
+# autoware_component_interface_specs
 
-- An [Autoware](https://github.com/autowarefoundation/autoware) repository that contains a basic set of high-quality, stable ROS packages for autonomous driving.
+This package defines the standardized component interface specifications for Autoware Core, ensuring consistent communication and interaction between various components in the Autoware autonomous driving stack.
 
-- Although this repository is currently empty, porting of code from Universe to Core will begin once the interfaces for Autoware Core/Universe have been finalized, as per ongoing [Autoware Architecture WG](https://github.com/autowarefoundation/autoware/discussions?discussions_q=label%3Aarchitecture_wg) discussions.
-- A more detailed explanation about Autoware Core can be found on the [Autoware concepts documentation page](https://autowarefoundation.github.io/autoware-documentation/main/design/autoware-concepts/#the-core-module).
+## Purpose
 
-- For researchers and developers who want to extend the functionality of Autoware Core with experimental, cutting-edge ROS packages, see [Autoware Universe](https://github.com/autowarefoundation/autoware_universe).
+The purpose of this package is to:
+
+- Provide a single source of truth for component interface definitions
+- Ensure consistency across different implementations
+- Facilitate modular development and component interchangeability
+- Document the communication protocols between Autoware Core components
+
+## Structure
+
+The package contains interface specifications for various components, including:
+
+- Message definitions
+- Service interfaces
+- Action interfaces
+
+## Usage
+
+To use these interface specifications in your component:
+
+1. Add this package as a dependency in your package.xml:
+
+   ```xml
+   <depend>autoware_component_interface_specs</depend>
+   ```
+
+2. Use the provided interfaces in your component code.
+
+   ```cpp
+   #include <autoware/component_interface_specs/localization.hpp>
+   // Example: Creating a publisher using the interface specs
+   using KinematicState = autoware::component_interface_specs::localization::KinematicState;
+   rclcpp::Publisher<KinematicState::Message>::SharedPtr publisher_ =
+   create_publisher<KinematicState::Message>(
+   KinematicState::name,
+   autoware::component_interface_specs::get_qos<KinematicState>());
+   // Example: Creating a subscription using the interface specs
+   auto subscriber_ = create_subscription<KinematicState::Message>(
+   KinematicState::name,
+   autoware::component_interface_specs::get_qos<KinematicState>(),
+   std::bind(&YourClass::callback, this, std::placeholders::1));
+   ```
