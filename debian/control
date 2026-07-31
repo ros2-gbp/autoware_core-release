@@ -1,0 +1,12 @@
+Source: ros-jazzy-autoware-ekf-localizer
+Section: misc
+Priority: optional
+Maintainer: "Takamasa Horibe" <takamasa.horibe@tier4.jp>
+Build-Depends: debhelper (>= 9.0.0), libeigen3-dev, libfmt-dev, ros-jazzy-ament-cmake-auto, ros-jazzy-ament-cmake-ros <!nocheck>, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-autoware-agnocast-wrapper, ros-jazzy-autoware-cmake, ros-jazzy-autoware-internal-debug-msgs, ros-jazzy-autoware-kalman-filter, ros-jazzy-autoware-lint-common <!nocheck>, ros-jazzy-autoware-localization-util, ros-jazzy-autoware-utils-geometry, ros-jazzy-autoware-utils-logging, ros-jazzy-autoware-utils-system, ros-jazzy-diagnostic-msgs, ros-jazzy-eigen3-cmake-module, ros-jazzy-geometry-msgs, ros-jazzy-launch-testing-ament-cmake <!nocheck>, ros-jazzy-nav-msgs, ros-jazzy-rclcpp, ros-jazzy-rclcpp-components, ros-jazzy-ros-testing <!nocheck>, ros-jazzy-std-srvs, ros-jazzy-tf2, ros-jazzy-tf2-ros, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/autoware_ekf_localizer/#jazzy
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-autoware-ekf-localizer
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libfmt-dev, ros-jazzy-autoware-agnocast-wrapper, ros-jazzy-autoware-internal-debug-msgs, ros-jazzy-autoware-kalman-filter, ros-jazzy-autoware-localization-util, ros-jazzy-autoware-utils-geometry, ros-jazzy-autoware-utils-logging, ros-jazzy-autoware-utils-system, ros-jazzy-diagnostic-msgs, ros-jazzy-geometry-msgs, ros-jazzy-nav-msgs, ros-jazzy-rclcpp, ros-jazzy-rclcpp-components, ros-jazzy-std-srvs, ros-jazzy-tf2, ros-jazzy-tf2-ros, ros-jazzy-ros-workspace
+Description: The autoware_ekf_localizer package
